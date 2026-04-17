@@ -7,7 +7,7 @@ function LPFooter() {
         <div className="footer-inner">
           <div className="footer-brand">
             <Link to="/" className="nav-logo">
-              <img src="https://nativeterritorial.com.br/logo.png" alt="NATIVE" />
+              <img src="/images/logo.png" alt="NATIVE" />
               <span>NATIVE <span className="logo-accent">Territorial</span></span>
             </Link>
             <p>Inteligência Territorial e Ambiental · Veranópolis, RS · CNPJ 64.247.072/0001-10</p>
