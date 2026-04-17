@@ -1,9 +1,9 @@
 const images = [
-  { src: 'https://nativeterritorial.com.br/aerial.jpg',    alt: 'Vista aérea Serra Gaúcha',         main: true },
-  { src: 'https://nativeterritorial.com.br/campo-1.jpg',   alt: 'GNSS em campo' },
-  { src: 'https://nativeterritorial.com.br/campo-2.jpg',   alt: 'Equipe em levantamento' },
-  { src: 'https://nativeterritorial.com.br/campo-3.jpg',   alt: 'Anotações técnicas em campo' },
-  { src: 'https://nativeterritorial.com.br/ambiental-1.jpg', alt: 'Vistoria ambiental' },
+  { src: '/images/aerial.jpg',    alt: 'Vista aérea Serra Gaúcha',         main: true },
+  { src: '/images/campo-1.jpg',   alt: 'GNSS em campo' },
+  { src: '/images/campo-2.jpg',   alt: 'Equipe em levantamento' },
+  { src: '/images/campo-3.jpg',   alt: 'Anotações técnicas em campo' },
+  { src: '/images/ambiental-1.jpg', alt: 'Vistoria ambiental' },
 ]
 
 function GallerySection() {
