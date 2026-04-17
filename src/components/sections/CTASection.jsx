@@ -2,16 +2,16 @@ function CTASection() {
   return (
     <section id="contato" className="cta-section" aria-labelledby="cta-title">
       <div className="container">
-        <div className="section-label">Contato</div>
-        <h2 className="section-title" id="cta-title">Fale com a NATIVE</h2>
-        <p className="section-sub">
+        <div className="section-label fade-in">Contato</div>
+        <h2 className="section-title fade-in" id="cta-title">Fale com a NATIVE</h2>
+        <p className="section-sub fade-in">
           Chama no WhatsApp e manda a cidade, o tipo de serviço e uma noção da área ou do
           objetivo da demanda. Respondemos rápido e com clareza.
         </p>
 
         <a
           href="https://typebot.co/my-typebot-ort5blj"
-          className="btn-primary"
+          className="btn-primary fade-in"
           target="_blank"
           rel="noopener noreferrer"
           style={{ fontSize: '16px', padding: '16px 32px' }}
@@ -20,7 +20,7 @@ function CTASection() {
         </a>
 
         <div className="cta-info">
-          <div className="cta-info-item">
+          <div className="cta-info-item fade-in" style={{ transitionDelay: '160ms' }}>
             <span className="cta-info-icon">📧</span>
             <div>
               <strong>E-mail</strong>
@@ -31,7 +31,7 @@ function CTASection() {
               </p>
             </div>
           </div>
-          <div className="cta-info-item">
+          <div className="cta-info-item fade-in" style={{ transitionDelay: '240ms' }}>
             <span className="cta-info-icon">📍</span>
             <div>
               <strong>Endereço</strong>

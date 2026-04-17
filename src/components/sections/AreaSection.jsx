@@ -24,11 +24,11 @@ function AreaSection() {
       <div className="container">
         <div className="area-grid">
           <div>
-            <div className="section-label">Área de atendimento</div>
-            <h2 className="section-title" id="area-title">
+            <div className="section-label fade-in">Área de atendimento</div>
+            <h2 className="section-title fade-in" id="area-title">
               Topografia em Veranópolis e região
             </h2>
-            <p className="section-sub" style={{ marginBottom: '28px' }}>
+            <p className="section-sub fade-in" style={{ marginBottom: '28px' }}>
               A NATIVE tem base em{' '}
               <strong style={{ color: 'var(--off-white)' }}>Veranópolis-RS</strong> e atende
               demandas em Vila Flores, Nova Bassano e outras cidades da região, além de atuar
@@ -36,10 +36,11 @@ function AreaSection() {
             </p>
 
             <div className="area-tags">
-              {tags.map((tag) => (
+              {tags.map((tag, i) => (
                 <span
                   key={tag.label}
-                  className={`area-tag ${tag.main ? 'main' : ''}`}
+                  className={`area-tag fade-in ${tag.main ? 'main' : ''}`}
+                  style={{ transitionDelay: `${i * 50}ms` }}
                 >
                   {tag.label}
                 </span>

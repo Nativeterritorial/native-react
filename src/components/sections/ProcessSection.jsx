@@ -26,14 +26,14 @@ function ProcessSection() {
     <section id="como-funciona" className="process-section" aria-labelledby="process-title">
       <div className="container">
         <div className="section-header">
-          <div className="section-label">Processo</div>
-          <h2 className="section-title" id="process-title">Como funciona</h2>
-          <p className="section-sub">Do primeiro contato à entrega final, um processo claro e organizado.</p>
+          <div className="section-label fade-in">Processo</div>
+          <h2 className="section-title fade-in" id="process-title">Como funciona</h2>
+          <p className="section-sub fade-in">Do primeiro contato à entrega final, um processo claro e organizado.</p>
         </div>
 
         <div className="process-steps">
-          {steps.map((step) => (
-            <div className="process-step" key={step.num}>
+          {steps.map((step, i) => (
+            <div className="process-step fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={step.num}>
               <div className="step-num">{step.num}</div>
               <h3>{step.title}</h3>
               <p>{step.desc}</p>

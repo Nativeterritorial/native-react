@@ -33,19 +33,19 @@ function ServicesSection() {
     <section id="servicos" className="services-section" aria-labelledby="services-title">
       <div className="container">
         <div className="section-header">
-          <div className="section-label">Serviços</div>
-          <h2 className="section-title" id="services-title">
+          <div className="section-label fade-in">Serviços</div>
+          <h2 className="section-title fade-in" id="services-title">
             Topografia, Georreferenciamento e Ambiental
           </h2>
-          <p className="section-sub">
+          <p className="section-sub fade-in">
             Soluções técnicas sob medida para imóveis rurais, áreas urbanas, loteamentos
             e regularização territorial.
           </p>
         </div>
 
         <div className="services-grid">
-          {services.map((service) => (
-            <div className="service-card" key={service.tag}>
+          {services.map((service, i) => (
+            <div className="service-card fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={service.tag}>
               <div className="service-card-img">
                 <img src={service.img} alt={service.imgAlt} loading="lazy" />
               </div>

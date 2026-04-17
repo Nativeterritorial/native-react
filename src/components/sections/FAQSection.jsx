@@ -81,8 +81,8 @@ function FAQSection() {
     <section id="faq" className="faq-section" aria-labelledby="faq-title">
       <div className="container">
         <div className="section-header">
-          <div className="section-label">Dúvidas frequentes</div>
-          <h2 className="section-title" id="faq-title">
+          <div className="section-label fade-in">Dúvidas frequentes</div>
+          <h2 className="section-title fade-in" id="faq-title">
             Perguntas sobre topografia e georreferenciamento
           </h2>
         </div>
@@ -92,7 +92,7 @@ function FAQSection() {
             const isOpen = openIndex === index
 
             return (
-              <div className={`faq-item ${isOpen ? 'open' : ''}`} key={index}>
+              <div className={`faq-item fade-in ${isOpen ? 'open' : ''}`} style={{ transitionDelay: `${index * 80}ms` }} key={index}>
                 <button
                   className="faq-question"
                   aria-expanded={isOpen}
