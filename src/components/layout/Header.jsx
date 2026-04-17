@@ -10,7 +10,7 @@ function Header() {
     <header>
       <div className="container nav-inner">
         <a href="#" className="nav-logo">
-          <img src="https://nativeterritorial.com.br/logo.png" alt="NATIVE" />
+          <img src="/images/logo.png" alt="NATIVE" />
           <span>NATIVE <span className="logo-accent">Inteligência Territorial</span></span>
         </a>
 

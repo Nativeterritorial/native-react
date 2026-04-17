@@ -10,7 +10,7 @@ function LPHeader({ whatsappMsg = 'Olá, vim pelo site e gostaria de um orçamen
     <header>
       <div className="container nav-inner">
         <Link to="/" className="nav-logo">
-          <img src="https://nativeterritorial.com.br/logo.png" alt="NATIVE" />
+          <img src="/images/logo.png" alt="NATIVE" />
           <span>NATIVE <span className="logo-accent">Inteligência Territorial</span></span>
         </Link>
 
