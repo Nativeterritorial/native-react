@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(cp -r C:/Users/User/Desktop/native/temp-setup/. C:/Users/User/Desktop/native/native-react/)",
+      "Bash(rm -rf C:/Users/User/Desktop/native/temp-setup)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/Nativeterritorial/native-site/main/topografia-veranopolis.html\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/Nativeterritorial/native-site/main/georreferenciamento-veranopolis.html\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/Nativeterritorial/native-site/main/licenciamento-ambiental-veranopolis.html\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/Nativeterritorial/native-site/main/georreferenciamento-cotipora.html\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/Nativeterritorial/native-site/main/politica-de-privacidade.html\")",
+      "Bash(gh api:*)",
+      "Bash(curl -s \"https://api.github.com/repos/Nativeterritorial/native-site/contents/georreferenciamento-cotipora.html\")",
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\('utf-8'\\)\\)\")",
+      "Bash(python3 -c ':*)",
+      "Bash(gh auth *)"
+    ]
+  }
+}
