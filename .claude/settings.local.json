@@ -17,7 +17,19 @@
       "Bash(curl -s \"https://api.github.com/repos/Nativeterritorial/native-site/contents/georreferenciamento-cotipora.html\")",
       "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\('utf-8'\\)\\)\")",
       "Bash(python3 -c ':*)",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "WebFetch(domain:visaradigital.com.br)",
+      "Bash(mkdir \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\src\\\\components\")",
+      "Bash(mkdir \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\src\\\\components\\\\sections\")",
+      "Bash(mkdir \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\src\\\\components\\\\layout\")",
+      "Bash(cmd.exe /c \"copy C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-logo-gold.png C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png\")",
+      "Bash(cmd.exe /c \"copy \\\\\"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-logo-gold.png\\\\\" \\\\\"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png\\\\\"\")",
+      "Bash(powershell -Command \"Copy-Item 'C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-logo-gold.png' 'C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png'\")",
+      "Bash(powershell -Command \"Test-Path 'C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png'\")",
+      "Bash(gh repo *)",
+      "Bash(powershell -Command \"cd 'C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react'; gh repo create visara-react --public --source=. --remote=origin --push\")",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)"
     ]
   }
 }

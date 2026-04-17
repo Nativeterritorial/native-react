@@ -1,6 +1,4 @@
-// A página Home importa e organiza todos os componentes em ordem.
-// Cada seção vive no seu próprio arquivo — fácil de editar individualmente.
-
+import { useEffect } from 'react'
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import CookieBanner from '../components/layout/CookieBanner'
@@ -18,6 +16,26 @@ import FAQSection from '../components/sections/FAQSection'
 import CTASection from '../components/sections/CTASection'
 
 function Home() {
+  // Fade-in on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible')
+            }, i * 80)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <Header />
