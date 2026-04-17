@@ -5,7 +5,7 @@ function AboutSection() {
         <div className="about-grid">
           <div className="about-image">
             <img
-              src="https://nativeterritorial.com.br/escritorio-1.jpg"
+              src="/images/escritorio-1.jpg"
               alt="Escritório NATIVE Territorial"
               loading="lazy"
             />
