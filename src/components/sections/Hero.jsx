@@ -2,7 +2,7 @@ function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-bg">
-        <img src="https://nativeterritorial.com.br/hero-campo.jpg" alt="" aria-hidden="true" />
+        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1400&h=700&fit=crop" alt="" aria-hidden="true" />
       </div>
 
       <div className="container">

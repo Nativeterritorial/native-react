@@ -6,8 +6,8 @@ const services = [
     tag: 'Topografia',
     title: 'Levantamento Topográfico e Planialtimétrico',
     desc: 'Levantamento topográfico, planialtimétrico, plantas, mapas e conferência de área para terrenos urbanos, imóveis rurais, obras e implantação de projetos.',
-    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&h=600&fit=crop',
-    imgAlt: 'Levantamento topográfico - vista aérea de terreno',
+    img: 'https://nativeterritorial.com.br/topografia-1.jpg',
+    imgAlt: 'Levantamento topográfico em campo',
     link: '/topografia-veranopolis',
   },
   {
@@ -44,8 +44,8 @@ function ServicesSection() {
         </div>
 
         <div className="services-grid">
-          {services.map((service, i) => (
-            <div className="service-card fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={service.tag}>
+          {services.map((service) => (
+            <div className="service-card" key={service.tag}>
               <div className="service-card-img">
                 <img src={service.img} alt={service.imgAlt} loading="lazy" />
               </div>
