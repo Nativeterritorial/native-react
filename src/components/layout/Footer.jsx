@@ -14,9 +14,9 @@ function Footer() {
           <div className="footer-links">
             <h5>Serviços</h5>
             <ul>
-              <li><a href="https://nativeterritorial.com.br/topografia-veranopolis.html">Topografia em Veranópolis</a></li>
-              <li><a href="https://nativeterritorial.com.br/georreferenciamento-veranopolis.html">Georreferenciamento em Veranópolis</a></li>
-              <li><a href="https://nativeterritorial.com.br/licenciamento-ambiental-veranopolis.html">Licenciamento Ambiental</a></li>
+              <li><a href="/topografia-veranopolis">Topografia em Veranópolis</a></li>
+              <li><a href="/georreferenciamento-veranopolis">Georreferenciamento em Veranópolis</a></li>
+              <li><a href="/licenciamento-ambiental-veranopolis">Licenciamento Ambiental</a></li>
             </ul>
           </div>
 
