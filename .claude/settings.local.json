@@ -29,7 +29,27 @@
       "Bash(gh repo *)",
       "Bash(powershell -Command \"cd 'C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react'; gh repo create visara-react --public --source=. --remote=origin --push\")",
       "WebSearch",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\topografia-1.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\topografia.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\geo-1.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\georreferenciamento.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\loteamento-1.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\loteamento.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\aerial.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\aerial.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\campo-1.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\campo-1.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\campo-2.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\campo-2.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\campo-3.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\campo-3.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\fotos native\\\\ambiental-1.jpg\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\images\\\\ambiental-1.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\logo.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\favicon.png\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\logo.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\public\\\\apple-touch-icon.png\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\favicon.png\")",
+      "Bash(cp \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\visara-logo-gold.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\visaradigital\\\\visara-react\\\\public\\\\apple-touch-icon.png\")",
+      "WebFetch(domain:nativeterritorial.com.br)",
+      "Bash(grep -cE \"^\\\\s+['a-z-]+.*:\\\\s*\\\\{$\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\src\\\\data\\\\geoCidades.js\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

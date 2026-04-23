@@ -3,6 +3,7 @@ import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
+import Seo from '../components/Seo'
 
 const trustItems = [
   { strong: 'GNSS', span: 'Equipamentos de precisão' },
@@ -37,6 +38,11 @@ const WA = 'https://wa.me/5554997104400?text=Olá,%20vim%20pelo%20site%20e%20gos
 function Topografia() {
   return (
     <>
+      <Seo
+        title="Topografia em Veranópolis | NATIVE Inteligência Territorial"
+        description="Levantamento topográfico, planialtimétrico, plantas e mapas em Veranópolis-RS e região. Equipamentos GNSS, ART e atendimento direto. NATIVE Topografia."
+        canonical="https://nativeterritorial.com.br/topografia-veranopolis"
+      />
       <LPHeader />
 
       <LPHero

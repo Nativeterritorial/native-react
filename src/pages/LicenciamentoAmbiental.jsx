@@ -3,6 +3,7 @@ import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
+import Seo from '../components/Seo'
 
 const trustItems = [
   { strong: 'Loteamentos', span: 'Apoio técnico completo' },
@@ -37,6 +38,11 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 function LicenciamentoAmbiental() {
   return (
     <>
+      <Seo
+        title="Licenciamento Ambiental e Loteamentos em Veranópolis | NATIVE"
+        description="Apoio técnico para loteamentos, regularização de áreas e demandas ambientais em Veranópolis-RS e região. ART, diagnóstico e atendimento direto."
+        canonical="https://nativeterritorial.com.br/licenciamento-ambiental-veranopolis"
+      />
       <LPHeader />
 
       <LPHero

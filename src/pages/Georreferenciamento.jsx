@@ -3,6 +3,7 @@ import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
+import Seo from '../components/Seo'
 
 const trustItems = [
   { strong: 'INCRA', span: 'Suporte técnico para exigências do processo' },
@@ -35,6 +36,11 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 function Georreferenciamento() {
   return (
     <>
+      <Seo
+        title="Georreferenciamento em Veranópolis | NATIVE Inteligência Territorial"
+        description="Georreferenciamento rural em Veranópolis-RS com suporte SIGEF/INCRA, ART e atendimento direto. Regularização, inventário, desmembramento e venda de imóveis rurais."
+        canonical="https://nativeterritorial.com.br/georreferenciamento-veranopolis"
+      />
       <LPHeader />
 
       <LPHero

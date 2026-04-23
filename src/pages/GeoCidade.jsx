@@ -5,6 +5,7 @@ import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
 import geoCidades from '../data/geoCidades'
+import Seo from '../components/Seo'
 
 // useParams() lê o parâmetro :cidade da URL.
 // Ex: /georreferenciamento/cotipora → cidade = 'cotipora'
@@ -47,6 +48,11 @@ function GeoCidade() {
 
   return (
     <>
+      <Seo
+        title={data.metaTitle}
+        description={data.metaDesc}
+        canonical={`https://nativeterritorial.com.br/georreferenciamento/${cidade}`}
+      />
       <LPHeader />
 
       <LPHero

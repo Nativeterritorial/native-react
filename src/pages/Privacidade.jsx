@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo'
 
 function Privacidade() {
   return (
     <>
+      <Seo
+        title="Política de Privacidade | NATIVE Inteligência Territorial"
+        description="Política de Privacidade da NATIVE Inteligência Territorial e Ambiental. Como coletamos, usamos e protegemos seus dados conforme a LGPD."
+        canonical="https://nativeterritorial.com.br/politica-de-privacidade"
+      />
       <header style={{ background: 'var(--grafite-900)', borderBottom: '1px solid var(--grafite-500)', padding: '0 24px' }}>
         <div style={{ maxWidth: '1080px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center' }}>
           <Link to="/" className="nav-logo">

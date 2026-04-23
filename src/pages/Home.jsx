@@ -14,6 +14,7 @@ import DiffSection from '../components/sections/DiffSection'
 import TestimonialsSection from '../components/sections/TestimonialsSection'
 import FAQSection from '../components/sections/FAQSection'
 import CTASection from '../components/sections/CTASection'
+import Seo from '../components/Seo'
 
 function Home() {
   // Fade-in on scroll
@@ -38,6 +39,11 @@ function Home() {
 
   return (
     <>
+      <Seo
+        title="Topografia e Georreferenciamento em Veranópolis | NATIVE"
+        description="A NATIVE Inteligência Territorial e Ambiental atua com topografia, georreferenciamento rural (SIGEF/INCRA) e loteamentos em Veranópolis, Vila Flores, Nova Bassano e região."
+        canonical="https://nativeterritorial.com.br/"
+      />
       <Header />
 
       <main>
