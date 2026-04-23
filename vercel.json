@@ -1,4 +1,15 @@
 {
+  "redirects": [
+    { "source": "/topografia-veranopolis.html", "destination": "/topografia-veranopolis", "permanent": true },
+    { "source": "/georreferenciamento-veranopolis.html", "destination": "/georreferenciamento-veranopolis", "permanent": true },
+    { "source": "/licenciamento-ambiental-veranopolis.html", "destination": "/licenciamento-ambiental-veranopolis", "permanent": true },
+    { "source": "/georreferenciamento-cotipora.html", "destination": "/georreferenciamento/cotipora", "permanent": true },
+    { "source": "/georreferenciamento-nova-prata.html", "destination": "/georreferenciamento/nova-prata", "permanent": true },
+    { "source": "/georreferenciamento-fagundes-varela.html", "destination": "/georreferenciamento/fagundes-varela", "permanent": true },
+    { "source": "/georreferenciamento-vila-flores.html", "destination": "/georreferenciamento/vila-flores", "permanent": true },
+    { "source": "/politica-de-privacidade.html", "destination": "/politica-de-privacidade", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
