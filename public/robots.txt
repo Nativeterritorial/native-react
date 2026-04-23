@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nativeterritorial.com.br/sitemap.xml
