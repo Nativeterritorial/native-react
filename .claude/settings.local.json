@@ -49,7 +49,12 @@
       "Bash(grep -cE \"^\\\\s+['a-z-]+.*:\\\\s*\\\\{$\" \"C:\\\\Users\\\\User\\\\Desktop\\\\native\\\\native-react\\\\src\\\\data\\\\geoCidades.js\")",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(gh pr create --title 'Adiciona 6 páginas de SEO local para georreferenciamento' --body ' *)",
+      "Bash(curl -sL -o /dev/null -w \"Final: %{http_code} %{url_effective}\\\\n\" \"https://nativeterritorial.com.br/georreferenciamento/nova-bassano\")",
+      "Bash(curl -sL \"https://nativeterritorial.com.br/georreferenciamento/nova-bassano\")",
+      "Bash(curl -sL -o /dev/null -w 'HTTP %{http_code}\\\\n' https://nativeterritorial.com.br/georreferenciamento/__TRACKED_VAR__)",
+      "Bash(curl -sL \"https://www.nativeterritorial.com.br/sitemap.xml\")"
     ]
   }
 }

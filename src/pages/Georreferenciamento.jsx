@@ -4,6 +4,33 @@ import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
 import Seo from '../components/Seo'
+import FAQ from '../components/FAQ'
+
+const faqItems = [
+  { q: 'Quando o georreferenciamento é obrigatório?', a: 'Sempre que houver movimentação de imóvel rural: venda, compra, inventário, partilha, desmembramento, remembramento ou regularização. Sem o certificado SIGEF, o cartório não registra.' },
+  { q: 'Quanto custa o georreferenciamento?', a: 'Depende do tamanho da área, acesso, complexidade dos limites e formato do imóvel. A NATIVE envia orçamento claro com escopo e prazo definidos após receber localização e tamanho aproximado.' },
+  { q: 'Quanto tempo leva o processo completo?', a: 'Em geral 30 a 90 dias entre campo, processamento, memorial descritivo e certificação no SIGEF. O prazo varia conforme agenda e eventuais exigências do INCRA.' },
+  { q: 'O que é SIGEF e por que é importante?', a: 'SIGEF é o sistema do INCRA que certifica o georreferenciamento de imóveis rurais. Sem o certificado SIGEF, o imóvel não pode ser registrado em cartório após qualquer movimentação.' },
+  { q: 'Preciso ir ao INCRA pessoalmente?', a: 'Não. A NATIVE cuida de toda a submissão técnica. Você fornece a documentação do imóvel e recebe o certificado ao final do processo.' },
+  { q: 'O serviço é entregue com ART?', a: 'Sim. Todo serviço vem com ART assinada pelo profissional que executou o levantamento — responsabilidade técnica do início ao fim.' },
+]
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Georreferenciamento rural em Veranópolis',
+    serviceType: 'Georreferenciamento rural SIGEF/INCRA',
+    provider: { '@type': 'ProfessionalService', name: 'NATIVE Inteligência Territorial e Ambiental', url: 'https://nativeterritorial.com.br/' },
+    areaServed: { '@type': 'City', name: 'Veranópolis' },
+    url: 'https://nativeterritorial.com.br/georreferenciamento-veranopolis',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+]
 
 const trustItems = [
   { strong: 'INCRA', span: 'Suporte técnico para exigências do processo' },
@@ -40,6 +67,8 @@ function Georreferenciamento() {
         title="Georreferenciamento em Veranópolis | NATIVE Inteligência Territorial"
         description="Georreferenciamento rural em Veranópolis-RS com suporte SIGEF/INCRA, ART e atendimento direto. Regularização, inventário, desmembramento e venda de imóveis rurais."
         canonical="https://nativeterritorial.com.br/georreferenciamento-veranopolis"
+        ogImage="https://nativeterritorial.com.br/images/georreferenciamento.jpg"
+        jsonLd={jsonLd}
       />
       <LPHeader />
 
@@ -136,6 +165,8 @@ function Georreferenciamento() {
       </section>
 
       {/* CTA */}
+      <FAQ items={faqItems} title="Dúvidas frequentes sobre georreferenciamento" />
+
       <section className="lp-cta-section">
         <div className="container">
           <div className="section-label">Precisa de georreferenciamento em Veranópolis?</div>

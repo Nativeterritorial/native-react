@@ -4,6 +4,32 @@ import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
 import Seo from '../components/Seo'
+import FAQ from '../components/FAQ'
+
+const faqItems = [
+  { q: 'O que é levantamento topográfico e quando preciso dele?', a: 'É a medição técnica de um terreno (área, desníveis, limites) com GNSS. Você precisa dele antes de construir, comprar/vender, implantar projetos, terraplenar ou protocolar em prefeitura.' },
+  { q: 'Qual a diferença entre topografia e georreferenciamento?', a: 'Topografia é o levantamento técnico do terreno (plantas, cotas, medidas). Georreferenciamento é o processo específico para imóveis rurais exigido pelo INCRA, com certificação no SIGEF. A NATIVE entrega os dois.' },
+  { q: 'Quanto tempo leva um levantamento topográfico?', a: 'Depende do tamanho e acesso à área. Levantamentos urbanos simples saem em poucos dias; áreas rurais maiores podem levar semanas entre campo, processamento e entrega da planta.' },
+  { q: 'A entrega vem com ART?', a: 'Sim. Todo serviço da NATIVE é entregue com ART (Anotação de Responsabilidade Técnica) assinada pelo profissional que executou o levantamento.' },
+  { q: 'Vocês atendem fora de Veranópolis?', a: 'Sim. Atendemos toda a Serra Gaúcha — Nova Prata, Cotiporã, Fagundes Varela, Antônio Prado, Ipê, Nova Bassano e cidades vizinhas.' },
+]
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Topografia em Veranópolis',
+    serviceType: 'Levantamento topográfico planialtimétrico',
+    provider: { '@type': 'ProfessionalService', name: 'NATIVE Inteligência Territorial e Ambiental', url: 'https://nativeterritorial.com.br/' },
+    areaServed: { '@type': 'City', name: 'Veranópolis' },
+    url: 'https://nativeterritorial.com.br/topografia-veranopolis',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+]
 
 const trustItems = [
   { strong: 'GNSS', span: 'Equipamentos de precisão' },
@@ -42,6 +68,8 @@ function Topografia() {
         title="Topografia em Veranópolis | NATIVE Inteligência Territorial"
         description="Levantamento topográfico, planialtimétrico, plantas e mapas em Veranópolis-RS e região. Equipamentos GNSS, ART e atendimento direto. NATIVE Topografia."
         canonical="https://nativeterritorial.com.br/topografia-veranopolis"
+        ogImage="https://nativeterritorial.com.br/images/topografia.jpg"
+        jsonLd={jsonLd}
       />
       <LPHeader />
 
@@ -111,6 +139,8 @@ function Topografia() {
       </section>
 
       {/* CTA */}
+      <FAQ items={faqItems} title="Dúvidas frequentes sobre topografia" />
+
       <section className="lp-cta-section">
         <div className="container">
           <div className="section-label">Solicitar orçamento</div>
