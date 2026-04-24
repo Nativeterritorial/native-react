@@ -1,12 +1,23 @@
 const WA_URL = 'https://typebot.co/my-typebot-ort5blj'
 
 function WhatsAppFloat() {
+  const handleClick = () => {
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18051450854/XfrNCOb3kaIcEOaPzZ9D',
+        'value': 1.0,
+        'currency': 'BRL'
+      })
+    }
+  }
+
   return (
     <a
       href={WA_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
+      onClick={handleClick}
       style={{
         position: 'fixed',
         right: '20px',
