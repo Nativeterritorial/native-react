@@ -5,10 +5,12 @@ import Georreferenciamento from './pages/Georreferenciamento'
 import LicenciamentoAmbiental from './pages/LicenciamentoAmbiental'
 import GeoCidade from './pages/GeoCidade'
 import Privacidade from './pages/Privacidade'
+import WhatsAppFloat from './components/WhatsAppFloat'
 
 function App() {
   return (
     <BrowserRouter>
+      <WhatsAppFloat />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/topografia-veranopolis" element={<Topografia />} />
