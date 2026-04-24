@@ -1,28 +1,43 @@
 import { useEffect } from 'react'
 
 // Componente SEO reutilizável.
-// Atualiza dinamicamente o title, meta description e a tag canonical da página.
-// Assim o Google entende qual é a URL "oficial" de cada página e evita problema
-// de "Cópia sem página canônica selecionada".
-function Seo({ title, description, canonical }) {
+// Atualiza title, meta description, canonical, tags Open Graph/Twitter e
+// injeta blocos JSON-LD (structured data) no <head>.
+function Seo({
+  title,
+  description,
+  canonical,
+  ogImage = 'https://nativeterritorial.com.br/images/aerial.jpg',
+  ogType = 'website',
+  jsonLd,
+}) {
   useEffect(() => {
-    // 1) Atualiza o title da aba do navegador
-    if (title) {
-      document.title = title
-    }
+    if (title) document.title = title
 
-    // 2) Atualiza a meta description
-    if (description) {
-      let metaDesc = document.querySelector('meta[name="description"]')
-      if (!metaDesc) {
-        metaDesc = document.createElement('meta')
-        metaDesc.setAttribute('name', 'description')
-        document.head.appendChild(metaDesc)
+    const setMeta = (attr, key, content) => {
+      if (!content) return
+      let el = document.querySelector(`meta[${attr}="${key}"]`)
+      if (!el) {
+        el = document.createElement('meta')
+        el.setAttribute(attr, key)
+        document.head.appendChild(el)
       }
-      metaDesc.setAttribute('content', description)
+      el.setAttribute('content', content)
     }
 
-    // 3) Atualiza (ou cria) a tag canonical
+    setMeta('name', 'description', description)
+    setMeta('property', 'og:title', title)
+    setMeta('property', 'og:description', description)
+    setMeta('property', 'og:url', canonical)
+    setMeta('property', 'og:image', ogImage)
+    setMeta('property', 'og:type', ogType)
+    setMeta('property', 'og:site_name', 'NATIVE Inteligência Territorial')
+    setMeta('property', 'og:locale', 'pt_BR')
+    setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:title', title)
+    setMeta('name', 'twitter:description', description)
+    setMeta('name', 'twitter:image', ogImage)
+
     if (canonical) {
       let linkCanonical = document.querySelector('link[rel="canonical"]')
       if (!linkCanonical) {
@@ -32,9 +47,28 @@ function Seo({ title, description, canonical }) {
       }
       linkCanonical.setAttribute('href', canonical)
     }
-  }, [title, description, canonical])
 
-  // Componente não renderiza nada visual — só manipula o <head>
+    // Remove JSON-LD dinâmicos de renderizações anteriores
+    document
+      .querySelectorAll('script[data-seo-jsonld="dynamic"]')
+      .forEach((n) => n.remove())
+
+    const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []
+    blocks.forEach((block) => {
+      const script = document.createElement('script')
+      script.type = 'application/ld+json'
+      script.setAttribute('data-seo-jsonld', 'dynamic')
+      script.textContent = JSON.stringify(block)
+      document.head.appendChild(script)
+    })
+
+    return () => {
+      document
+        .querySelectorAll('script[data-seo-jsonld="dynamic"]')
+        .forEach((n) => n.remove())
+    }
+  }, [title, description, canonical, ogImage, ogType, jsonLd])
+
   return null
 }
 

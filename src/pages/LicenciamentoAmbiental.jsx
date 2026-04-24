@@ -4,6 +4,32 @@ import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
 import Seo from '../components/Seo'
+import FAQ from '../components/FAQ'
+
+const faqItems = [
+  { q: 'O que é licenciamento ambiental e quando é necessário?', a: 'É o processo administrativo exigido para atividades que usam recursos naturais ou podem impactar o ambiente — loteamentos, obras, atividades rurais, etc. A NATIVE ajuda a identificar o que é necessário no caso concreto.' },
+  { q: 'Qual a diferença entre regularização de área e licenciamento ambiental?', a: 'Regularização organiza a situação documental/registral do imóvel; licenciamento ambiental autoriza o uso ou a atividade pretendida. Muitas vezes andam juntos — a NATIVE atua nos dois.' },
+  { q: 'Vocês acompanham loteamentos do início ao fim?', a: 'Sim. Damos apoio técnico em etapas de implantação, conferência de lotes e integração com topografia e georreferenciamento quando o processo exige.' },
+  { q: 'O serviço inclui ART?', a: 'Sim. Todo serviço técnico é entregue com ART assinada pelo profissional responsável.' },
+  { q: 'Vocês atendem só Veranópolis?', a: 'Não. Atendemos toda a Serra Gaúcha — Nova Prata, Cotiporã, Antônio Prado, Ipê, Nova Bassano e cidades vizinhas.' },
+]
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Licenciamento ambiental e loteamentos em Veranópolis',
+    serviceType: 'Licenciamento ambiental e regularização de áreas',
+    provider: { '@type': 'ProfessionalService', name: 'NATIVE Inteligência Territorial e Ambiental', url: 'https://nativeterritorial.com.br/' },
+    areaServed: { '@type': 'City', name: 'Veranópolis' },
+    url: 'https://nativeterritorial.com.br/licenciamento-ambiental-veranopolis',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+]
 
 const trustItems = [
   { strong: 'Loteamentos', span: 'Apoio técnico completo' },
@@ -42,6 +68,8 @@ function LicenciamentoAmbiental() {
         title="Licenciamento Ambiental e Loteamentos em Veranópolis | NATIVE"
         description="Apoio técnico para loteamentos, regularização de áreas e demandas ambientais em Veranópolis-RS e região. ART, diagnóstico e atendimento direto."
         canonical="https://nativeterritorial.com.br/licenciamento-ambiental-veranopolis"
+        ogImage="https://nativeterritorial.com.br/images/ambiental-1.jpg"
+        jsonLd={jsonLd}
       />
       <LPHeader />
 
@@ -111,6 +139,8 @@ function LicenciamentoAmbiental() {
       </section>
 
       {/* CTA */}
+      <FAQ items={faqItems} title="Dúvidas frequentes sobre licenciamento e loteamentos" />
+
       <section className="lp-cta-section">
         <div className="container">
           <div className="section-label">Solicitar orçamento</div>

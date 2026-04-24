@@ -6,6 +6,7 @@ import TrustBar from '../components/layout/TrustBar'
 import CookieBanner from '../components/layout/CookieBanner'
 import geoCidades from '../data/geoCidades'
 import Seo from '../components/Seo'
+import FAQ from '../components/FAQ'
 
 // useParams() lê o parâmetro :cidade da URL.
 // Ex: /georreferenciamento/cotipora → cidade = 'cotipora'
@@ -38,6 +39,52 @@ function GeoCidade() {
     return <Navigate to="/georreferenciamento-veranopolis" replace />
   }
 
+  const canonical = `https://nativeterritorial.com.br/georreferenciamento/${cidade}`
+
+  // FAQ padrão com nome da cidade interpolado
+  const faqItems = [
+    { q: `Quanto custa o georreferenciamento em ${data.cidade}?`, a: `O valor varia conforme tamanho da área, acesso, formato do imóvel e complexidade dos limites. A NATIVE envia um orçamento claro depois que você informa a localização e o tamanho aproximado da propriedade em ${data.cidade}.` },
+    { q: 'Quanto tempo leva o processo completo?', a: 'Depende da agenda de campo e das exigências do INCRA, mas em geral o processo — do levantamento até o certificado SIGEF — leva de 30 a 90 dias. A NATIVE acompanha cada etapa e te mantém informado.' },
+    { q: 'Preciso ir pessoalmente ao INCRA?', a: 'Não. A NATIVE cuida de toda a submissão técnica ao SIGEF. Você só precisa fornecer a documentação do imóvel e acompanhar as orientações para o cartório depois da certificação.' },
+    { q: 'O georreferenciamento é obrigatório mesmo para áreas pequenas?', a: 'Sim. Para qualquer imóvel rural com movimentação (venda, herança, desmembramento, etc.) o georreferenciamento certificado no SIGEF é exigência do INCRA, independentemente do tamanho.' },
+    { q: `A NATIVE atende mesmo imóveis em locais afastados de ${data.cidade}?`, a: `Sim. Temos base em Veranópolis e atendemos toda a região rural de ${data.cidade}, inclusive propriedades com acesso difícil. Equipamentos GNSS de precisão garantem o levantamento em qualquer terreno.` },
+  ]
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `Georreferenciamento rural em ${data.cidade}`,
+      serviceType: 'Georreferenciamento rural SIGEF/INCRA',
+      provider: {
+        '@type': 'ProfessionalService',
+        name: 'NATIVE Inteligência Territorial e Ambiental',
+        url: 'https://nativeterritorial.com.br/',
+      },
+      areaServed: { '@type': 'City', name: data.cidade },
+      description: data.metaDesc,
+      url: canonical,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://nativeterritorial.com.br/' },
+        { '@type': 'ListItem', position: 2, name: 'Georreferenciamento', item: 'https://nativeterritorial.com.br/georreferenciamento-veranopolis' },
+        { '@type': 'ListItem', position: 3, name: data.cidade, item: canonical },
+      ],
+    },
+  ]
+
   // Monta os steps do processo com o nome da cidade
   const steps = [
     { num: '1', title: 'Diagnóstico', desc: 'Você informa a localização, o tamanho e o objetivo. A NATIVE analisa a documentação e explica exatamente o que é necessário.' },
@@ -51,7 +98,8 @@ function GeoCidade() {
       <Seo
         title={data.metaTitle}
         description={data.metaDesc}
-        canonical={`https://nativeterritorial.com.br/georreferenciamento/${cidade}`}
+        canonical={canonical}
+        jsonLd={jsonLd}
       />
       <LPHeader />
 
@@ -146,6 +194,8 @@ function GeoCidade() {
           </div>
         </div>
       </section>
+
+      <FAQ items={faqItems} title={`Dúvidas comuns sobre georreferenciamento em ${data.cidade}`} />
 
       {/* CTA */}
       <section className="lp-cta-section">
