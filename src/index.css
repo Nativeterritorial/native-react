@@ -9,24 +9,94 @@
    ==================================================================== */
 
 :root {
-  --ink: #1a1f17;
-  --ink-2: #232922;
-  --ink-soft: #4a544a;
-  --ink-mute: #7a8378;
-  --paper: #f5f1e8;
-  --paper-2: #ebe5d4;
-  --paper-3: #ddd6c2;
-  --moss: #3d4f2c;
-  --moss-deep: #2a3a1d;
-  --moss-soft: rgba(61,79,44,0.08);
-  --terracotta: #c66b3d;
-  --terracotta-deep: #a5562f;
-  --line: rgba(245,241,232,0.1);
-  --line-paper: rgba(26,31,23,0.1);
+  /* Default (= tema da Home): neutro preto + off-white */
+  --ink: #141414;
+  --ink-2: #1c1c1c;
+  --ink-soft: #4a4a4a;
+  --ink-mute: #7a7a78;
+  --paper: #f5f5f0;
+  --paper-2: #ebebE5;
+  --paper-3: #d8d8d2;
+  --moss: #2a2a2a;
+  --moss-deep: #1a1a1a;
+  --moss-soft: rgba(245,245,240,0.08);
+  --terracotta: #d4ccba;       /* acento sutil pra home, quase neutro */
+  --terracotta-deep: #b8af9c;
+  --line: rgba(245,245,240,0.08);
+  --line-paper: rgba(20,20,20,0.1);
 
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ====================================================================
+   TEMAS POR PÁGINA — override de variáveis por wrapper
+   Cada página de serviço tem identidade própria mantendo a estrutura
+   ==================================================================== */
+
+/* Topografia — Azul aço + grafite */
+.theme-topografia {
+  --ink: #161b22;
+  --ink-2: #1f262e;
+  --ink-soft: #3f4a55;
+  --ink-mute: #7b8593;
+  --paper: #f1f3f6;
+  --paper-2: #e2e6ec;
+  --moss: #233244;
+  --moss-deep: #18222f;
+  --terracotta: #3b78a8;       /* azul aço */
+  --terracotta-deep: #2a5d86;
+  --line: rgba(241,243,246,0.1);
+  --line-paper: rgba(22,27,34,0.1);
+}
+
+/* Georreferenciamento — Âmbar + grafite */
+.theme-georref {
+  --ink: #1a1814;
+  --ink-2: #25221d;
+  --ink-soft: #4a443a;
+  --ink-mute: #8a8276;
+  --paper: #f4efe4;
+  --paper-2: #e8e2d2;
+  --moss: #3a2f1d;
+  --moss-deep: #2a2114;
+  --terracotta: #d99838;       /* âmbar */
+  --terracotta-deep: #b87a23;
+  --line: rgba(244,239,228,0.1);
+  --line-paper: rgba(26,24,20,0.1);
+}
+
+/* Ambiental — Verde oliva + off-white + grafite */
+.theme-ambiental {
+  --ink: #1c2418;
+  --ink-2: #252e20;
+  --ink-soft: #4a553c;
+  --ink-mute: #8a9378;
+  --paper: #f2efe5;
+  --paper-2: #e5e1d0;
+  --moss: #3a4628;
+  --moss-deep: #2a331b;
+  --terracotta: #6b7c4a;       /* verde oliva */
+  --terracotta-deep: #4f5e34;
+  --line: rgba(242,239,229,0.1);
+  --line-paper: rgba(28,36,24,0.1);
+}
+
+/* Loteamentos — Cinza concreto + verde menta */
+.theme-loteamentos {
+  --ink: #232624;
+  --ink-2: #2c302e;
+  --ink-soft: #4d5350;
+  --ink-mute: #8a908d;
+  --paper: #e8e9e6;
+  --paper-2: #d8dad6;
+  --moss: #1f3026;
+  --moss-deep: #142019;
+  --terracotta: #8fbf9f;       /* verde menta */
+  --terracotta-deep: #6da37f;
+  --line: rgba(232,233,230,0.1);
+  --line-paper: rgba(35,38,36,0.1);
 
   /* legacy aliases */
   --grafite-900: var(--ink);

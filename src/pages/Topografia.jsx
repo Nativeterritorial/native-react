@@ -133,7 +133,7 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 
 function Topografia() {
   return (
-    <>
+    <div className="theme-topografia">
       <Seo
         title="Topografia em Veranópolis-RS e Serra Gaúcha | NATIVE"
         description="Levantamento topográfico planialtimétrico, conferência de área, locação de obra e as-built em Veranópolis e toda a Serra Gaúcha. GNSS RTK, ART em todos os serviços, atendimento direto."
@@ -257,7 +257,7 @@ function Topografia() {
 
       <LPFooter />
       <CookieBanner />
-    </>
+    </div>
   )
 }
 

@@ -133,7 +133,7 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 
 function LicenciamentoAmbiental() {
   return (
-    <>
+    <div className="theme-ambiental">
       <Seo
         title="Licenciamento Ambiental, CAR e Outorga em Veranópolis-RS | NATIVE"
         description="Licenciamento ambiental, Cadastro Ambiental Rural (CAR), outorga de água, supressão vegetal e laudo técnico em Veranópolis e Serra Gaúcha. Encaminhamento direto, ART em tudo."
@@ -261,7 +261,7 @@ function LicenciamentoAmbiental() {
 
       <LPFooter />
       <CookieBanner />
-    </>
+    </div>
   )
 }
 

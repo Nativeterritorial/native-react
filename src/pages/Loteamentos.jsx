@@ -121,7 +121,7 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 
 function Loteamentos() {
   return (
-    <>
+    <div className="theme-loteamentos">
       <Seo
         title="Loteamentos e Regularização Fundiária em Veranópolis-RS | NATIVE"
         description="Topografia, georreferenciamento, ambiental e conferência de lotes para implantação e regularização de loteamentos em Veranópolis e Serra Gaúcha. ART em todas as etapas."
@@ -242,7 +242,7 @@ function Loteamentos() {
 
       <LPFooter />
       <CookieBanner />
-    </>
+    </div>
   )
 }
 

@@ -141,7 +141,7 @@ const WA = 'https://typebot.co/my-typebot-ort5blj'
 
 function Georreferenciamento() {
   return (
-    <>
+    <div className="theme-georref">
       <Seo
         title="Georreferenciamento Rural — SIGEF/INCRA em Veranópolis-RS | NATIVE"
         description="Georreferenciamento certificado SIGEF/INCRA em Veranópolis e Serra Gaúcha. Retificação, desmembramento, remembramento e atendimento a exigência do INCRA. GNSS RTK, ART em todos os serviços."
@@ -265,7 +265,7 @@ function Georreferenciamento() {
 
       <LPFooter />
       <CookieBanner />
-    </>
+    </div>
   )
 }
 
