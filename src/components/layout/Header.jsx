@@ -33,7 +33,7 @@ function Header() {
 
         <div className="nav-cta">
           <a
-            href="https://typebot.co/my-typebot-ort5blj"
+            href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
             className="btn-primary"
             target="_blank"
             rel="noopener noreferrer"
@@ -60,7 +60,7 @@ function Header() {
         <a href="#area" onClick={() => setMenuOpen(false)}>Área atendida</a>
         <a href="#faq" onClick={() => setMenuOpen(false)}>Dúvidas</a>
         <a
-          href="https://typebot.co/my-typebot-ort5blj"
+          href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
           style={{ color: 'var(--terracotta)', fontWeight: '600' }}
           onClick={() => setMenuOpen(false)}
         >

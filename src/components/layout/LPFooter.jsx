@@ -37,7 +37,7 @@ function LPFooter() {
           <div className="footer-links">
             <h5>Contato</h5>
             <ul>
-              <li><a href="https://typebot.co/my-typebot-ort5blj">WhatsApp</a></li>
+              <li><a href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.">WhatsApp</a></li>
               <li><a href="mailto:contato@nativeterritorial.com.br">E-mail</a></li>
             </ul>
           </div>

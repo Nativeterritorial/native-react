@@ -25,7 +25,7 @@ function LPHeader({ whatsappMsg = 'Olá, vim pelo site e gostaria de um orçamen
         </nav>
 
         <div className="nav-cta">
-          <a href="https://typebot.co/my-typebot-ort5blj" className="btn-primary" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." className="btn-primary" target="_blank" rel="noopener noreferrer">
             💬 Orçamento
           </a>
         </div>
@@ -41,7 +41,7 @@ function LPHeader({ whatsappMsg = 'Olá, vim pelo site e gostaria de um orçamen
         <Link to="/georreferenciamento-veranopolis" onClick={() => setMenuOpen(false)}>Georreferenciamento</Link>
         <Link to="/licenciamento-ambiental-veranopolis" onClick={() => setMenuOpen(false)}>Ambiental</Link>
         <Link to="/loteamentos-veranopolis" onClick={() => setMenuOpen(false)}>Loteamentos</Link>
-        <a href="https://typebot.co/my-typebot-ort5blj" style={{ color: 'var(--verde)', fontWeight: '600' }} onClick={() => setMenuOpen(false)}>
+        <a href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." style={{ color: 'var(--verde)', fontWeight: '600' }} onClick={() => setMenuOpen(false)}>
           💬 Orçamento no WhatsApp
         </a>
       </nav>

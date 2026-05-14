@@ -137,7 +137,7 @@ const diffs = [
   { icon: '🤝', title: 'Direto com o técnico', desc: 'Você fala com quem vai a campo, processa e assina a ART. Sem comercial, sem terceirização, sem responsabilidade diluída.' },
 ]
 
-const WA = 'https://typebot.co/my-typebot-ort5blj'
+const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
 
 function Georreferenciamento() {
   return (

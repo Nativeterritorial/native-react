@@ -129,7 +129,7 @@ const diffs = [
   { icon: '📋', title: 'ART em tudo', desc: 'Cada laudo, projeto, cadastro ou levantamento sai com ART assinada pelo profissional responsável. Documento de verdade.' },
 ]
 
-const WA = 'https://typebot.co/my-typebot-ort5blj'
+const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
 
 function LicenciamentoAmbiental() {
   return (
