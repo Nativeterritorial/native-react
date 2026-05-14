@@ -1,3 +1,5 @@
+import Reveal from '../Reveal'
+
 function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -14,11 +16,11 @@ function Hero() {
         <div className="hero-content">
           <div className="hero-badge">Base · Veranópolis · Rio Grande do Sul</div>
 
-          <h1 id="hero-title">
-            Limite, área e<br />
-            documentação técnica<br />
+          <Reveal as="h1" id="hero-title" threshold={0.1}>
+            Limite, área e <br />
+            documentação técnica <br />
             <em>do seu imóvel.</em>
-          </h1>
+          </Reveal>
 
           <p className="hero-sub">
             Topografia, georreferenciamento rural (SIGEF/INCRA) e licenciamento ambiental

@@ -1,3 +1,5 @@
+import Reveal from '../Reveal'
+
 const team = [
   {
     initial: 'F',
@@ -25,9 +27,9 @@ function AboutSection() {
       <div className="container">
         <div className="about-header">
           <div className="section-label">Quem faz</div>
-          <h2 className="section-title" id="about-title">
+          <Reveal as="h2" className="section-title" id="about-title">
             A NATIVE é feita por <em>duas pessoas</em>
-          </h2>
+          </Reveal>
           <p className="section-sub">
             Atendimento direto, sem terceirização. Você fala com quem assina a ART, conduz
             o processo e entrega o trabalho. Os dois sócios atuam de ponta a ponta —

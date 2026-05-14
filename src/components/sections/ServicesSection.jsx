@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../Reveal'
 
 const services = [
   {
@@ -42,9 +43,9 @@ function ServicesSection() {
       <div className="container">
         <div className="section-header">
           <div className="section-label fade-in">Serviços</div>
-          <h2 className="section-title fade-in" id="services-title">
+          <Reveal as="h2" className="section-title" id="services-title">
             Topografia, Georreferenciamento, <em>Ambiental</em> e Loteamentos
-          </h2>
+          </Reveal>
           <p className="section-sub fade-in">
             Soluções técnicas integradas para imóveis rurais, áreas urbanas, loteamentos
             e regularização territorial — com ART em todas as etapas.

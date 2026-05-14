@@ -1,3 +1,5 @@
+import Reveal from '../Reveal'
+
 const steps = [
   {
     num: '1',
@@ -28,7 +30,7 @@ function ProcessSection() {
       <div className="container">
         <div className="section-header">
           <div className="section-label fade-in">Processo</div>
-          <h2 className="section-title fade-in" id="process-title">Como funciona</h2>
+          <Reveal as="h2" className="section-title" id="process-title">Como funciona</Reveal>
           <p className="section-sub fade-in">Do primeiro contato à entrega final, um processo claro e organizado.</p>
         </div>
 

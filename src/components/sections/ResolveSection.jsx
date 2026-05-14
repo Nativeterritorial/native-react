@@ -1,3 +1,5 @@
+import Reveal from '../Reveal'
+
 // Dados separados do JSX — boa prática para listas repetitivas
 const cards = [
   {
@@ -23,9 +25,9 @@ function ResolveSection() {
       <div className="folio" aria-hidden="true">FL. 01 · ESCOPO</div>
       <div className="container">
         <div className="section-label">O que você resolve com a NATIVE</div>
-        <h2 className="section-title" id="resolve-title">
-          Limites, mapas, documentação<br />e leitura técnica do território
-        </h2>
+        <Reveal as="h2" className="section-title" id="resolve-title">
+          Limites, mapas, documentação <br />e leitura técnica do território
+        </Reveal>
 
         <div className="resolve-grid">
           {/* .map() transforma o array em elementos JSX — equivalente a um loop */}

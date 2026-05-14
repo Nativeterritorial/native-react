@@ -1,3 +1,5 @@
+import Reveal from '../Reveal'
+
 const IconMail = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <rect x="3" y="5" width="18" height="14" rx="1.5" />
@@ -23,7 +25,7 @@ function CTASection() {
     <section id="contato" className="cta-section" aria-labelledby="cta-title">
       <div className="container">
         <div className="section-label fade-in">Contato</div>
-        <h2 className="section-title fade-in" id="cta-title">Fale com a NATIVE</h2>
+        <Reveal as="h2" className="section-title" id="cta-title">Fale com a NATIVE</Reveal>
         <p className="section-sub fade-in">
           Chama no WhatsApp e manda a cidade, o tipo de serviço e uma noção da área ou do
           objetivo da demanda. Respondemos rápido e com clareza.
