@@ -24,16 +24,16 @@ function CTASection() {
   return (
     <section id="contato" className="cta-section" aria-labelledby="cta-title">
       <div className="container">
-        <div className="section-label fade-in">Contato</div>
+        <div className="section-label">Contato</div>
         <Reveal as="h2" className="section-title" id="cta-title">Fale com a NATIVE</Reveal>
-        <p className="section-sub fade-in">
+        <p className="section-sub">
           Chama no WhatsApp e manda a cidade, o tipo de serviço e uma noção da área ou do
           objetivo da demanda. Respondemos rápido e com clareza.
         </p>
 
         <a
           href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
-          className="btn-primary fade-in"
+          className="btn-primary"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -42,7 +42,7 @@ function CTASection() {
         </a>
 
         <div className="cta-info">
-          <div className="cta-info-item fade-in" style={{ transitionDelay: '160ms' }}>
+          <div className="cta-info-item">
             <span className="cta-info-icon"><IconMail /></span>
             <div>
               <strong>E-mail</strong>
@@ -53,7 +53,7 @@ function CTASection() {
               </p>
             </div>
           </div>
-          <div className="cta-info-item fade-in" style={{ transitionDelay: '240ms' }}>
+          <div className="cta-info-item">
             <span className="cta-info-icon"><IconPin /></span>
             <div>
               <strong>Endereço</strong>
