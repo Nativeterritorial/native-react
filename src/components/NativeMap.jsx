@@ -44,15 +44,20 @@ function NativeMap() {
       },
     ).addTo(map)
 
-    // Pin pulsante via DivIcon (HTML/CSS — total controle visual)
+    // Pin estilo Google em SVG, com halo dourado pulsando
     const pulseIcon = L.divIcon({
       className: 'native-pulse-pin',
-      html:
-        '<span class="pulse-ring"></span>' +
-        '<span class="pulse-ring delay"></span>' +
-        '<span class="pulse-dot"></span>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 12],
+      html: `
+        <span class="pulse-halo"></span>
+        <svg class="pulse-pin-svg" viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path class="pin-body"
+            d="M16 0C7.163 0 0 7.163 0 16c0 11 16 28 16 28s16-17 16-28C32 7.163 24.837 0 16 0z"/>
+          <circle class="pin-dot" cx="16" cy="16" r="5.5"/>
+        </svg>
+      `,
+      iconSize: [32, 44],
+      iconAnchor: [16, 42], // ponta inferior do pin no ponto exato
+      tooltipAnchor: [0, -36],
     })
 
     L.marker(POSITION, { icon: pulseIcon, keyboard: false, interactive: true })
