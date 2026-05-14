@@ -2,32 +2,22 @@ function FAQ({ items, title = 'Perguntas frequentes', label = 'FAQ' }) {
   if (!items || items.length === 0) return null
 
   return (
-    <section className="lp-section" aria-labelledby="faq-title">
+    <section className="lp-section faq-section" aria-labelledby="faq-title">
       <div className="container">
         <div className="section-label">{label}</div>
         <h2 className="section-title" id="faq-title">{title}</h2>
-        <div style={{ marginTop: '32px', maxWidth: '820px' }}>
+        <div className="faq-list">
           {items.map((item, i) => (
-            <details
-              key={i}
-              style={{
-                borderTop: '1px solid rgba(0,0,0,0.08)',
-                padding: '18px 0',
-              }}
-            >
-              <summary
-                style={{
-                  cursor: 'pointer',
-                  fontWeight: 500,
-                  fontSize: '17px',
-                  listStyle: 'none',
-                }}
-              >
-                {item.q}
+            <details className="faq-item" key={i}>
+              <summary className="faq-question">
+                <span>{item.q}</span>
+                <span className="faq-chevron" aria-hidden="true">+</span>
               </summary>
-              <p style={{ marginTop: '12px', opacity: 0.8, lineHeight: 1.6 }}>
-                {item.a}
-              </p>
+              <div className="faq-answer">
+                <div className="faq-answer-inner">
+                  {typeof item.a === 'string' ? <p>{item.a}</p> : item.a}
+                </div>
+              </div>
             </details>
           ))}
         </div>

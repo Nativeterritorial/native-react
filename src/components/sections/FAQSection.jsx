@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 // Cada item do FAQ tem pergunta e resposta.
 // A resposta pode ser uma string simples ou JSX para formatação rica.
 const faqs = [
@@ -70,13 +68,6 @@ const faqs = [
 
 function FAQSection() {
   // openIndex guarda qual item está aberto (null = nenhum)
-  const [openIndex, setOpenIndex] = useState(null)
-
-  const toggle = (index) => {
-    // Se clicou no que já está aberto, fecha. Senão, abre o clicado.
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
   return (
     <section id="faq" className="faq-section" aria-labelledby="faq-title">
       <div className="container">
@@ -88,27 +79,19 @@ function FAQSection() {
         </div>
 
         <div className="faq-list">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index
-
-            return (
-              <div className={`faq-item fade-in ${isOpen ? 'open' : ''}`} style={{ transitionDelay: `${index * 80}ms` }} key={index}>
-                <button
-                  className="faq-question"
-                  aria-expanded={isOpen}
-                  onClick={() => toggle(index)}
-                >
-                  {faq.question}
-                  <span className="faq-chevron">+</span>
-                </button>
-                <div className="faq-answer" role="region">
-                  <div className="faq-answer-inner">
-                    {faq.answer}
-                  </div>
+          {faqs.map((faq, index) => (
+            <details className="faq-item fade-in" style={{ transitionDelay: `${index * 80}ms` }} key={index}>
+              <summary className="faq-question">
+                <span>{faq.question}</span>
+                <span className="faq-chevron" aria-hidden="true">+</span>
+              </summary>
+              <div className="faq-answer">
+                <div className="faq-answer-inner">
+                  {faq.answer}
                 </div>
               </div>
-            )
-          })}
+            </details>
+          ))}
         </div>
       </div>
     </section>
