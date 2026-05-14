@@ -31,6 +31,7 @@ const services = [
 function ServicesSection() {
   return (
     <section id="servicos" className="services-section" aria-labelledby="services-title">
+      <div className="folio" aria-hidden="true">FL. 02 · SERVIÇOS</div>
       <div className="container">
         <div className="section-header">
           <div className="section-label fade-in">Serviços</div>

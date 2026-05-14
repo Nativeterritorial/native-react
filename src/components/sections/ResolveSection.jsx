@@ -20,6 +20,7 @@ const cards = [
 function ResolveSection() {
   return (
     <section className="resolve-section" aria-labelledby="resolve-title">
+      <div className="folio" aria-hidden="true">FL. 01 · ESCOPO</div>
       <div className="container">
         <div className="section-label">O que você resolve com a NATIVE</div>
         <h2 className="section-title" id="resolve-title">

@@ -1,6 +1,8 @@
 function AboutSection() {
   return (
     <section className="about-section" aria-labelledby="about-title">
+      <div className="grid-bg" aria-hidden="true" />
+      <div className="folio folio-paper" aria-hidden="true">FL. 04 · EQUIPE</div>
       <div className="container">
         <div className="about-grid">
           <div className="about-image">

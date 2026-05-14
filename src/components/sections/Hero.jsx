@@ -2,22 +2,27 @@ function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-bg">
-        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1400&h=700&fit=crop" alt="" aria-hidden="true" />
+        <img src="/images/aerial.jpg" alt="" aria-hidden="true" />
+      </div>
+
+      <div className="hero-coord" aria-hidden="true">
+        <strong>28°56′13″ S</strong>
+        51°33′23″ W
       </div>
 
       <div className="container">
         <div className="hero-content">
-          <div className="hero-badge">Base em Veranópolis · Atende todo o Rio Grande do Sul</div>
+          <div className="hero-badge">Base · Veranópolis · Rio Grande do Sul</div>
 
           <h1 id="hero-title">
-            Seu imóvel resolvido<br />
-            com quem <em>domina</em><br />
-            o processo.
+            Limite, área e<br />
+            documentação técnica<br />
+            <em>do seu imóvel.</em>
           </h1>
 
           <p className="hero-sub">
-            Topografia, georreferenciamento e medição de áreas na Serra Gaúcha e em todo o RS.
-            Atendimento direto com o técnico que executa — do orçamento à entrega.
+            Topografia, georreferenciamento rural (SIGEF/INCRA) e licenciamento ambiental
+            em toda a Serra Gaúcha. Atendimento direto com o profissional técnico que executa.
           </p>
 
           <div className="hero-actions">
@@ -27,27 +32,27 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Orçamento no WhatsApp →
+              Solicitar orçamento →
             </a>
             <a href="#servicos" className="btn-ghost">Ver serviços</a>
           </div>
 
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-num accent">+1k</span>
-              <span className="stat-label">Hectares georreferenciados na Serra Gaúcha</span>
+              <span className="stat-num accent">+1.000</span>
+              <span className="stat-label">hectares · serra gaúcha</span>
             </div>
             <div className="stat-item">
-              <span className="stat-num">GNSS</span>
-              <span className="stat-label">Equipamentos de precisão</span>
+              <span className="stat-num">13</span>
+              <span className="stat-label">cidades atendidas · RS</span>
             </div>
             <div className="stat-item">
-              <span className="stat-num">ART</span>
-              <span className="stat-label">Responsabilidade técnica em tudo</span>
+              <span className="stat-num">SIGEF</span>
+              <span className="stat-label">certificação · INCRA</span>
             </div>
             <div className="stat-item">
-              <span className="stat-num accent">Direto</span>
-              <span className="stat-label">Com o profissional, sem intermediário</span>
+              <span className="stat-num accent">ART</span>
+              <span className="stat-label">responsabilidade técnica</span>
             </div>
           </div>
         </div>

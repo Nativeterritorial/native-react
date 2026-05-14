@@ -24,6 +24,7 @@ const steps = [
 function ProcessSection() {
   return (
     <section id="como-funciona" className="process-section" aria-labelledby="process-title">
+      <div className="folio folio-paper" aria-hidden="true">FL. 03 · MÉTODO</div>
       <div className="container">
         <div className="section-header">
           <div className="section-label fade-in">Processo</div>
