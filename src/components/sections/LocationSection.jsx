@@ -1,5 +1,3 @@
-import NativeMap from '../NativeMap'
-
 const IconPin = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z" />
@@ -54,21 +52,6 @@ function LocationSection() {
           </div>
         </div>
 
-        <div className="location-map">
-          <NativeMap />
-        </div>
-
-        <div className="location-actions">
-          <a
-            href="https://maps.google.com/?q=Rua+Dr.+José+Montaury,+595,+Veranópolis,+RS"
-            className="btn-ghost"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="btn-icon"><IconPin /></span>
-            Abrir no Google Maps
-          </a>
-        </div>
       </div>
     </section>
   )

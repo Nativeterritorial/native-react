@@ -14,6 +14,7 @@ import DiffSection from '../components/sections/DiffSection'
 import TestimonialsSection from '../components/sections/TestimonialsSection'
 import FAQSection from '../components/sections/FAQSection'
 import CTASection from '../components/sections/CTASection'
+import MapStrip from '../components/sections/MapStrip'
 import Seo from '../components/Seo'
 
 function Home() {
@@ -59,6 +60,7 @@ function Home() {
         <TestimonialsSection />
         <FAQSection />
         <CTASection />
+        <MapStrip />
       </main>
 
       <Footer />
