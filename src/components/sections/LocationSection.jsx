@@ -1,3 +1,5 @@
+import NativeMap from '../NativeMap'
+
 function LocationSection() {
   return (
     <section className="location-section" aria-labelledby="location-title">
@@ -35,13 +37,7 @@ function LocationSection() {
         </div>
 
         <div className="location-map">
-          <iframe
-            src="https://www.google.com/maps?q=Rua+Dr.+José+Montaury,+595,+Veranópolis,+RS&output=embed"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Mapa da NATIVE em Veranópolis"
-          />
+          <NativeMap />
         </div>
 
         <div className="location-actions">
