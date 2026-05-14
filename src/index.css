@@ -643,6 +643,13 @@ section { position: relative; }
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+.services-grid.services-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.services-grid.services-grid-4 .service-card-body { padding: 28px 24px; }
+.services-grid.services-grid-4 .service-card h3 { font-size: clamp(19px, 1.4vw, 23px); }
+.services-grid.services-grid-4 .service-card p { font-size: 13.5px; margin-bottom: 22px; }
 .service-card {
   position: relative;
   background: var(--ink-2);
@@ -1545,6 +1552,7 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .resolve-grid { grid-template-columns: 1fr; gap: 16px; }
   .services-grid { grid-template-columns: 1fr; gap: 20px; }
+  .services-grid.services-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
   .process-steps::before { display: none; }
   .diff-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1579,6 +1587,7 @@ footer {
 
   .cta-section { padding: 80px 0; }
   .process-steps { grid-template-columns: 1fr; gap: 24px 0; }
+  .services-grid.services-grid-4 { grid-template-columns: 1fr; }
   .diff-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }
   .gallery-grid img.g-main { grid-column: span 1; }

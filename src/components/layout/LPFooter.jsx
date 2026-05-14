@@ -30,6 +30,7 @@ function LPFooter() {
               <li><Link to="/topografia-veranopolis">Topografia</Link></li>
               <li><Link to="/georreferenciamento-veranopolis">Georreferenciamento</Link></li>
               <li><Link to="/licenciamento-ambiental-veranopolis">Licenciamento Ambiental</Link></li>
+              <li><Link to="/loteamentos-veranopolis">Loteamentos</Link></li>
             </ul>
           </div>
 

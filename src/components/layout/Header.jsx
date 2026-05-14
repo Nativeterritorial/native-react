@@ -24,6 +24,7 @@ function Header() {
         <nav aria-label="Menu principal">
           <ul>
             <li><a href="#servicos">Serviços</a></li>
+            <li><a href="/licenciamento-ambiental-veranopolis">Ambiental</a></li>
             <li><a href="#como-funciona">Método</a></li>
             <li><a href="#area">Área atendida</a></li>
             <li><a href="#faq">Dúvidas</a></li>
@@ -54,6 +55,7 @@ function Header() {
 
       <nav className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-label="Menu mobile">
         <a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a>
+        <a href="/licenciamento-ambiental-veranopolis" onClick={() => setMenuOpen(false)}>Ambiental</a>
         <a href="#como-funciona" onClick={() => setMenuOpen(false)}>Método</a>
         <a href="#area" onClick={() => setMenuOpen(false)}>Área atendida</a>
         <a href="#faq" onClick={() => setMenuOpen(false)}>Dúvidas</a>

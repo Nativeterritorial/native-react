@@ -1,4 +1,3 @@
-// Link do React Router — navega sem recarregar a página
 import { Link } from 'react-router-dom'
 
 const services = [
@@ -19,12 +18,20 @@ const services = [
     link: '/georreferenciamento-veranopolis',
   },
   {
-    tag: 'Loteamentos e Ambiental',
-    title: 'Loteamentos, Regularização e Suporte Ambiental',
-    desc: 'Apoio técnico para loteamentos, conferência de lotes, regularização de áreas e demandas ambientais conectadas ao uso seguro do imóvel.',
+    tag: 'Ambiental',
+    title: 'Licenciamento Ambiental, CAR e Outorga',
+    desc: 'Licenciamento ambiental, Cadastro Ambiental Rural (CAR), outorga de água, supressão vegetal e adequação ambiental — encaminhamento técnico e ART em todas as etapas.',
+    img: '/images/ambiental-1.jpg',
+    imgAlt: 'Licenciamento ambiental em propriedade rural',
+    link: '/licenciamento-ambiental-veranopolis',
+  },
+  {
+    tag: 'Loteamentos',
+    title: 'Loteamentos e Regularização Fundiária',
+    desc: 'Apoio técnico para implantação de loteamentos, conferência de lotes, regularização de áreas urbanas e rurais e organização documental territorial.',
     img: '/images/loteamento.jpg',
     imgAlt: 'Loteamento e regularização de área',
-    link: '/licenciamento-ambiental-veranopolis',
+    link: '/loteamentos-veranopolis',
   },
 ]
 
@@ -36,15 +43,15 @@ function ServicesSection() {
         <div className="section-header">
           <div className="section-label fade-in">Serviços</div>
           <h2 className="section-title fade-in" id="services-title">
-            Topografia, Georreferenciamento e Ambiental
+            Topografia, Georreferenciamento, <em>Ambiental</em> e Loteamentos
           </h2>
           <p className="section-sub fade-in">
-            Soluções técnicas sob medida para imóveis rurais, áreas urbanas, loteamentos
-            e regularização territorial.
+            Soluções técnicas integradas para imóveis rurais, áreas urbanas, loteamentos
+            e regularização territorial — com ART em todas as etapas.
           </p>
         </div>
 
-        <div className="services-grid">
+        <div className="services-grid services-grid-4">
           {services.map((service, i) => (
             <div className="service-card fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={service.tag}>
               <div className="service-card-img">
@@ -54,7 +61,6 @@ function ServicesSection() {
                 <div className="service-tag">{service.tag}</div>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
-                {/* Link interno — React Router não recarrega a página */}
                 <Link to={service.link} className="service-link">Saiba mais →</Link>
               </div>
             </div>

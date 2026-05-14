@@ -17,6 +17,7 @@ function Footer() {
               <li><a href="/topografia-veranopolis">Topografia em Veranópolis</a></li>
               <li><a href="/georreferenciamento-veranopolis">Georreferenciamento em Veranópolis</a></li>
               <li><a href="/licenciamento-ambiental-veranopolis">Licenciamento Ambiental</a></li>
+              <li><a href="/loteamentos-veranopolis">Loteamentos</a></li>
             </ul>
           </div>
 
