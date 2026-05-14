@@ -19,7 +19,7 @@ function AboutSection() {
             <p>
               A NATIVE Inteligência Territorial e Ambiental é especializada em topografia,
               georreferenciamento rural e licenciamento ambiental, com base em Veranópolis/RS
-              e atuação em toda a Serra Gaúcha e estados vizinhos.
+              e atuação em toda a Serra Gaúcha e no Rio Grande do Sul.
             </p>
             <p>
               Trabalhamos com equipamentos GNSS de precisão, emitimos TRT em todos os serviços

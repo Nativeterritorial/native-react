@@ -30,7 +30,7 @@ function LocationSection() {
                 contato@nativeterritorial.com.br
               </a>
             </p>
-            <small>Atendimento também em RS, SC, PR e SP</small>
+            <small>Atende toda a Serra Gaúcha e o RS</small>
           </div>
         </div>
 

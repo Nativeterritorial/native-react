@@ -51,7 +51,7 @@ const faqs = [
       <p>
         Não. Nossa base é em Veranópolis, mas atendemos também Vila Flores, Nova Bassano,
         Cotiporã, Fagundes Varela, Nova Prata e outras cidades da Serra Gaúcha, além de
-        demandas em RS, SC, PR e SP.
+        demandas em todo o Rio Grande do Sul.
       </p>
     ),
   },

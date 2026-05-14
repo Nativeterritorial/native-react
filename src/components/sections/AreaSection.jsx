@@ -1,12 +1,12 @@
 const tags = [
-  { label: '📍 Veranópolis', main: true },
+  { label: 'Veranópolis', main: true },
   { label: 'Vila Flores' },
   { label: 'Nova Bassano' },
   { label: 'Cotiporã' },
   { label: 'Fagundes Varela' },
   { label: 'Nova Prata' },
   { label: 'Serra Gaúcha' },
-  { label: 'RS · SC · PR · SP' },
+  { label: 'Rio Grande do Sul' },
 ]
 
 const areaList = [
@@ -26,13 +26,13 @@ function AreaSection() {
           <div>
             <div className="section-label fade-in">Área de atendimento</div>
             <h2 className="section-title fade-in" id="area-title">
-              Topografia em Veranópolis e região
+              Topografia em Veranópolis e em <em>todo o RS</em>
             </h2>
-            <p className="section-sub fade-in" style={{ marginBottom: '28px' }}>
+            <p className="section-sub fade-in" style={{ marginBottom: '40px' }}>
               A NATIVE tem base em{' '}
-              <strong style={{ color: 'var(--off-white)' }}>Veranópolis-RS</strong> e atende
-              demandas em Vila Flores, Nova Bassano e outras cidades da região, além de atuar
-              no <strong style={{ color: 'var(--off-white)' }}>RS, SC, PR e SP</strong>.
+              <strong style={{ color: 'var(--ink)' }}>Veranópolis-RS</strong> e atende
+              demandas em toda a Serra Gaúcha e no{' '}
+              <strong style={{ color: 'var(--ink)' }}>Rio Grande do Sul</strong>.
             </p>
 
             <div className="area-tags">
@@ -53,7 +53,7 @@ function AreaSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              💬 Verificar atendimento na minha cidade
+              Verificar atendimento na sua cidade →
             </a>
           </div>
 

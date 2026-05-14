@@ -7,17 +7,17 @@ function Hero() {
 
       <div className="container">
         <div className="hero-content">
-          <div className="hero-badge">📍 Base em Veranópolis-RS · RS, SC, PR e SP</div>
+          <div className="hero-badge">Base em Veranópolis · Atende todo o Rio Grande do Sul</div>
 
           <h1 id="hero-title">
             Seu imóvel resolvido<br />
             com quem <em>domina</em><br />
-            o processo
+            o processo.
           </h1>
 
           <p className="hero-sub">
-            Topografia, georreferenciamento e medição de áreas na Serra Gaúcha.
-            Atendimento direto com o técnico, do orçamento à entrega.
+            Topografia, georreferenciamento e medição de áreas na Serra Gaúcha e em todo o RS.
+            Atendimento direto com o técnico que executa — do orçamento à entrega.
           </p>
 
           <div className="hero-actions">
@@ -27,27 +27,27 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              💬 Orçamento no WhatsApp
+              Orçamento no WhatsApp →
             </a>
             <a href="#servicos" className="btn-ghost">Ver serviços</a>
           </div>
 
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-num accent">4</span>
-              <span className="stat-label">Estados atendidos</span>
+              <span className="stat-num accent">+1k</span>
+              <span className="stat-label">Hectares georreferenciados na Serra Gaúcha</span>
             </div>
             <div className="stat-item">
               <span className="stat-num">GNSS</span>
               <span className="stat-label">Equipamentos de precisão</span>
             </div>
             <div className="stat-item">
-              <span className="stat-num">TRT</span>
-              <span className="stat-label">Responsabilidade técnica</span>
+              <span className="stat-num">ART</span>
+              <span className="stat-label">Responsabilidade técnica em tudo</span>
             </div>
             <div className="stat-item">
               <span className="stat-num accent">Direto</span>
-              <span className="stat-label">Com o profissional</span>
+              <span className="stat-label">Com o profissional, sem intermediário</span>
             </div>
           </div>
         </div>
