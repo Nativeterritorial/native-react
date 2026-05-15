@@ -11,7 +11,7 @@ const team = [
   },
   {
     initial: 'P',
-    name: 'Precila',
+    name: 'Precila Cicconeto Nadal',
     role: 'Sócia · Ambiental e Gestão',
     label: '02 · AMBIENTAL',
     bio: 'Conduz a área ambiental da NATIVE — licenciamento, Cadastro Ambiental Rural (CAR), outorga de água, supressão vegetal e laudos técnicos. Também responde pela parte administrativa do escritório.',
