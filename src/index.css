@@ -1158,29 +1158,33 @@ section { position: relative; }
    CSS scroll-driven nativo: o navegador amarra a rotação ao progresso
    de entrada da seção, frame a frame. Suave, sem JS, sem piscar.
    ==================================================================== */
-@keyframes section-fold {
-  from { transform: perspective(1600px) rotateX(72deg); }
+/* Primeira folha: desdobra a partir da BASE (abrindo a carta) */
+@keyframes fold-open-bottom {
+  from { transform: perspective(1600px) rotateX(70deg); }
+  to   { transform: perspective(1600px) rotateX(0deg); }
+}
+/* Última folha: desdobra a partir do TOPO (fechando a carta) */
+@keyframes fold-open-top {
+  from { transform: perspective(1600px) rotateX(-70deg); }
   to   { transform: perspective(1600px) rotateX(0deg); }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
-    .resolve-section,
-    .about-section,
-    .services-section,
-    .process-section,
-    .area-section,
-    .location-section,
-    .gallery-section,
-    .diff-section,
-    .testimonials-section,
-    .faq-section {
+    /* só a PRIMEIRA seção de conteúdo abre de baixo */
+    .resolve-section {
       transform-origin: center bottom;
       backface-visibility: hidden;
-      animation: section-fold linear both;
+      animation: fold-open-bottom linear both;
       animation-timeline: view();
-      /* começa quando o topo entra pelo rodapé, completa quando a
-         seção avançou ~38% da travessia — fold longo e visível */
-      animation-range: entry 0% cover 38%;
+      animation-range: entry 0% cover 42%;
+    }
+    /* só a ÚLTIMA seção (CTA) fecha de cima */
+    .cta-section {
+      transform-origin: center top;
+      backface-visibility: hidden;
+      animation: fold-open-top linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 42%;
     }
   }
 }
