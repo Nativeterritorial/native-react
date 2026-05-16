@@ -56,11 +56,11 @@ function ScrollTilt() {
         // progress 0->1 conforme o topo da seção sobe do rodapé até ~45% da tela
         const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.55)))
         const e = 1 - Math.pow(1 - p, 2) // easeOutQuad
-        const rot = (1 - e) * 18          // graus rotateX (dramático)
-        const ty = (1 - e) * 110          // px translateY
-        const sc = 0.86 + e * 0.14        // 0.86 -> 1
-        const op = 0.15 + e * 0.85        // 0.15 -> 1
-        el.style.transform = `perspective(900px) rotateX(${rot.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`
+        const rot = (1 - e) * 45          // graus rotateX (extremo)
+        const ty = (1 - e) * 140          // px translateY
+        const sc = 0.8 + e * 0.2          // 0.8 -> 1
+        const op = 0.1 + e * 0.9          // 0.1 -> 1
+        el.style.transform = `perspective(1000px) rotateX(${rot.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`
         el.style.opacity = op.toFixed(3)
       })
       raf = 0
