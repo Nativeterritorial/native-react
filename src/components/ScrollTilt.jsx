@@ -54,15 +54,17 @@ function ScrollTilt() {
       const vh = window.innerHeight
       visible.forEach((el) => {
         const r = el.getBoundingClientRect()
-        // progress: 0 quando o topo da seção entra pelo rodapé,
-        // 1 quando a base chega a ~30% da altura da tela
-        const denom = vh * 0.7 + r.height * 0.25
-        const p = Math.min(1, Math.max(0, (vh - r.top) / denom))
-        const e = 1 - Math.pow(1 - p, 3) // easeOutCubic
-        // rotateX grande + perspective curta (300px) = distorção forte
-        const rot = (1 - e) * 38          // graus, pivot na base
-        const op = 0.25 + e * 0.75        // 0.25 -> 1
-        el.style.transform = `perspective(300px) rotateX(${rot.toFixed(2)}deg)`
+        // Janela LONGA: 0 quando o topo da seção entra pelo rodapé (r.top = vh),
+        // 1 só quando o topo sobe até ~15% da tela. Travel ~= 0.85 * vh.
+        // Easing LINEAR de proposito: o efeito se distribui parelho durante
+        // toda a rolagem (gradual e visivel), em vez de "piscar" no inicio.
+        const startAt = vh          // comeca a animar quando entra
+        const endAt = vh * 0.15     // termina quando o topo chega a 15% da tela
+        const p = Math.min(1, Math.max(0, (startAt - r.top) / (startAt - endAt)))
+        const e = p                 // linear
+        const rot = (1 - e) * 34          // graus, pivot na base
+        const op = 0.3 + e * 0.7          // 0.3 -> 1
+        el.style.transform = `perspective(320px) rotateX(${rot.toFixed(2)}deg)`
         el.style.opacity = op.toFixed(3)
       })
       raf = 0
