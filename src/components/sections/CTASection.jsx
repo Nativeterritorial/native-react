@@ -1,4 +1,5 @@
 import Reveal from '../Reveal'
+import Magnetic from '../Magnetic'
 
 const IconMail = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -31,15 +32,17 @@ function CTASection() {
           objetivo da demanda. Respondemos rápido e com clareza.
         </p>
 
-        <a
-          href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
-          className="btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="btn-icon"><IconWhats /></span>
-          Falar no WhatsApp
-        </a>
+        <Magnetic strength={0.4}>
+          <a
+            href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+            className="btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="btn-icon"><IconWhats /></span>
+            Falar no WhatsApp
+          </a>
+        </Magnetic>
 
         <div className="cta-info">
           <div className="cta-info-item">

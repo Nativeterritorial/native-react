@@ -1,4 +1,5 @@
 import Reveal from '../Reveal'
+import Magnetic from '../Magnetic'
 
 function Hero() {
   return (
@@ -28,14 +29,16 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a
-              href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
-              className="btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Solicitar orçamento →
-            </a>
+            <Magnetic>
+              <a
+                href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+                className="btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento →
+              </a>
+            </Magnetic>
             <a href="#servicos" className="btn-ghost">Ver serviços</a>
           </div>
 

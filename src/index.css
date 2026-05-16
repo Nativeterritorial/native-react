@@ -1154,6 +1154,63 @@ section { position: relative; }
 }
 
 /* ====================================================================
+   MARQUEE — faixa de cidades/coordenadas correndo
+   ==================================================================== */
+.marquee {
+  overflow: hidden;
+  background: var(--terracotta);
+  border-top: 1px solid var(--line-paper);
+  border-bottom: 1px solid var(--line-paper);
+  padding: 18px 0;
+  white-space: nowrap;
+}
+.marquee-inner {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee:hover .marquee-inner { animation-play-state: paused; }
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-transform: none;
+}
+.marquee-plus {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(20,20,20,0.45);
+}
+.marquee-coord {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(20,20,20,0.55);
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-inner { animation: none; }
+}
+
+/* ====================================================================
    MAP STRIP — faixa full-width antes do footer
    ==================================================================== */
 .map-strip {
