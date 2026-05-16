@@ -53,13 +53,14 @@ function ScrollTilt() {
       const vh = window.innerHeight
       visible.forEach((el) => {
         const r = el.getBoundingClientRect()
-        // progress: 0 quando o topo entra por baixo, 1 quando passa do centro
-        const p = Math.min(1, Math.max(0, 1 - r.top / vh))
-        // entrada: levanta de 3.5° e fade até assentar
-        const rot = (1 - p) * 3.5            // graus rotateX
-        const ty = (1 - p) * 26              // px translateY
-        const op = 0.55 + p * 0.45           // 0.55 -> 1
-        el.style.transform = `perspective(1400px) rotateX(${rot.toFixed(2)}deg) translateY(${ty.toFixed(1)}px)`
+        // progress 0->1 conforme o topo da seção sobe do rodapé até ~35% da tela
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.65)))
+        const e = 1 - Math.pow(1 - p, 2) // easeOutQuad
+        const rot = (1 - e) * 9           // graus rotateX (bem mais visível)
+        const ty = (1 - e) * 60           // px translateY
+        const sc = 0.94 + e * 0.06        // 0.94 -> 1
+        const op = 0.4 + e * 0.6          // 0.4 -> 1
+        el.style.transform = `perspective(1100px) rotateX(${rot.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`
         el.style.opacity = op.toFixed(3)
       })
       raf = 0

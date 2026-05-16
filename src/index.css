@@ -1487,6 +1487,43 @@ section { position: relative; }
   position: relative;
 }
 .testimonials-section .section-title { color: var(--paper); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 64px;
+  border-top: 1px solid var(--line);
+}
+.stat-block {
+  padding: 48px 32px 0 0;
+  border-right: 1px solid var(--line);
+}
+.stat-block:last-child { border-right: none; padding-right: 0; }
+.stat-block-num {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(44px, 4.5vw, 76px);
+  font-weight: 400;
+  color: var(--terracotta);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-block-label {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
+}
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-block { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 0; }
+  .stat-block:last-child { border-bottom: none; }
+}
 
 /* ====================================================================
    FAQ

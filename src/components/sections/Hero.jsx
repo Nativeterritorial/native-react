@@ -1,5 +1,6 @@
 import Reveal from '../Reveal'
 import Magnetic from '../Magnetic'
+import CountUp from '../CountUp'
 
 function Hero() {
   return (
@@ -44,11 +45,11 @@ function Hero() {
 
           <div className="hero-stats">
             <div className="stat-item">
-              <span className="stat-num accent">+1.000</span>
+              <CountUp className="stat-num accent" value="+1.000" />
               <span className="stat-label">hectares · serra gaúcha</span>
             </div>
             <div className="stat-item">
-              <span className="stat-num">13</span>
+              <CountUp className="stat-num" value="13" />
               <span className="stat-label">cidades atendidas · RS</span>
             </div>
             <div className="stat-item">
