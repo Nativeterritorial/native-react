@@ -43,7 +43,8 @@ function ScrollTilt() {
     )
 
     els.forEach((el) => {
-      el.style.transformOrigin = 'center top'
+      // pivota a partir da BASE — efeito "carta levantando da mesa" (Weecom)
+      el.style.transformOrigin = 'center bottom'
       el.style.willChange = 'transform, opacity'
       io.observe(el)
     })
@@ -53,14 +54,15 @@ function ScrollTilt() {
       const vh = window.innerHeight
       visible.forEach((el) => {
         const r = el.getBoundingClientRect()
-        // progress 0->1 conforme o topo da seção sobe do rodapé até ~45% da tela
-        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.55)))
-        const e = 1 - Math.pow(1 - p, 2) // easeOutQuad
-        const rot = (1 - e) * 45          // graus rotateX (extremo)
-        const ty = (1 - e) * 140          // px translateY
-        const sc = 0.8 + e * 0.2          // 0.8 -> 1
-        const op = 0.1 + e * 0.9          // 0.1 -> 1
-        el.style.transform = `perspective(1000px) rotateX(${rot.toFixed(2)}deg) translateY(${ty.toFixed(1)}px) scale(${sc.toFixed(4)})`
+        // progress: 0 quando o topo da seção entra pelo rodapé,
+        // 1 quando a base chega a ~30% da altura da tela
+        const denom = vh * 0.7 + r.height * 0.25
+        const p = Math.min(1, Math.max(0, (vh - r.top) / denom))
+        const e = 1 - Math.pow(1 - p, 3) // easeOutCubic
+        // rotateX grande + perspective curta (300px) = distorção forte
+        const rot = (1 - e) * 38          // graus, pivot na base
+        const op = 0.25 + e * 0.75        // 0.25 -> 1
+        el.style.transform = `perspective(300px) rotateX(${rot.toFixed(2)}deg)`
         el.style.opacity = op.toFixed(3)
       })
       raf = 0
