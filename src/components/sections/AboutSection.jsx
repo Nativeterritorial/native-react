@@ -7,7 +7,7 @@ const team = [
     role: 'Sócio · Operações e Gestão',
     label: '01 · OP / GESTÃO',
     bio: 'Conduz a operação da NATIVE — atendimento, comercial, organização técnica do escritório e relacionamento com cartórios, prefeituras e órgãos. É o ponto de contato do cliente do primeiro orçamento à entrega final.',
-    photo: null, // colocar /images/felipe.jpg quando tiver
+    photo: '/images/felipe.jpg',
   },
   {
     initial: 'P',
@@ -15,7 +15,7 @@ const team = [
     role: 'Sócia · Ambiental e Gestão',
     label: '02 · AMBIENTAL',
     bio: 'Conduz a área ambiental da NATIVE — licenciamento, Cadastro Ambiental Rural (CAR), outorga de água, supressão vegetal e laudos técnicos. Também responde pela parte administrativa do escritório.',
-    photo: null,
+    photo: '/images/precila.jpg',
   },
 ]
 
