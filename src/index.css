@@ -1158,44 +1158,6 @@ section { position: relative; }
    CSS scroll-driven nativo: o navegador amarra a rotação ao progresso
    de entrada da seção, frame a frame. Suave, sem JS, sem piscar.
    ==================================================================== */
-/* STICKY-STACK (Weecom): hero fica preso enquanto tomba pra trás,
-   a próxima seção (opaca, acima) escorrega por cima cobrindo ele */
-@keyframes hero-recede {
-  from { transform: perspective(900px) rotateX(0deg); opacity: 1; }
-  70%  { opacity: 1; }
-  to   { transform: perspective(900px) rotateX(52deg); opacity: 0.55; }
-}
-.hero-pin { position: relative; }
-.resolve-section { position: relative; }
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
-    /* trilha de scroll: 2 telas — hero fica preso a 1ª, tomba na 2ª */
-    .hero-pin {
-      height: 200vh;
-      view-timeline-name: --heropin;
-      view-timeline-axis: block;
-    }
-    .hero-pin > .hero {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      min-height: 100vh;
-      transform-origin: center top;
-      backface-visibility: hidden;
-      animation: hero-recede linear both;
-      animation-timeline: --heropin;
-      /* flat enquanto preso (1ª metade), tomba na 2ª metade da trilha */
-      animation-range: cover 45% cover 100%;
-      z-index: 0;
-    }
-    /* próxima seção cobre o hero recuando */
-    .resolve-section {
-      z-index: 2;
-      background: var(--ink);
-    }
-  }
-}
 
 /* ====================================================================
    MARQUEE — faixa de cidades/coordenadas correndo

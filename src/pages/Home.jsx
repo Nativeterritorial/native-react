@@ -49,9 +49,7 @@ function Home() {
       <Header />
 
       <main>
-        <div className="hero-pin">
-          <Hero />
-        </div>
+        <Hero />
         <ResolveSection />
         <Marquee />
         <AboutSection />
