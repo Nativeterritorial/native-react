@@ -8,6 +8,7 @@ const team = [
     label: '01 · OP / GESTÃO',
     bio: 'Conduz a operação da NATIVE — atendimento, comercial, organização técnica do escritório e relacionamento com cartórios, prefeituras e órgãos. É o ponto de contato do cliente do primeiro orçamento à entrega final.',
     photo: '/images/felipe.jpg',
+    photoPos: 'center 25%',
   },
   {
     initial: 'P',
@@ -16,6 +17,7 @@ const team = [
     label: '02 · AMBIENTAL',
     bio: 'Conduz a área ambiental da NATIVE — licenciamento, Cadastro Ambiental Rural (CAR), outorga de água, supressão vegetal e laudos técnicos. Também responde pela parte administrativa do escritório.',
     photo: '/images/precila.jpg',
+    photoPos: 'center 20%',
   },
 ]
 
@@ -42,7 +44,12 @@ function AboutSection() {
             <article className="team-card" key={m.name}>
               <div className="team-photo">
                 {m.photo ? (
-                  <img src={m.photo} alt={`Retrato de ${m.name}`} loading="lazy" />
+                  <img
+                    src={m.photo}
+                    alt={`Retrato de ${m.name}`}
+                    loading="lazy"
+                    style={m.photoPos ? { objectPosition: m.photoPos } : undefined}
+                  />
                 ) : (
                   <>
                     <span className="team-photo-initial" aria-hidden="true">{m.initial}.</span>
