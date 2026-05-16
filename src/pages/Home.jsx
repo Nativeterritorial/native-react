@@ -16,7 +16,6 @@ import FAQSection from '../components/sections/FAQSection'
 import CTASection from '../components/sections/CTASection'
 import MapStrip from '../components/sections/MapStrip'
 import Marquee from '../components/Marquee'
-import ScrollTilt from '../components/ScrollTilt'
 import Seo from '../components/Seo'
 
 function Home() {
@@ -48,8 +47,6 @@ function Home() {
         canonical="https://nativeterritorial.com.br/"
       />
       <Header />
-
-      <ScrollTilt />
 
       <main>
         <Hero />

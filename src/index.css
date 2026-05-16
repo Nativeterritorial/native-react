@@ -1154,6 +1154,38 @@ section { position: relative; }
 }
 
 /* ====================================================================
+   SCROLL FOLD — seção "se dobra" ao entrar (clone do Weecom)
+   CSS scroll-driven nativo: o navegador amarra a rotação ao progresso
+   de entrada da seção, frame a frame. Suave, sem JS, sem piscar.
+   ==================================================================== */
+@keyframes section-fold {
+  from { transform: perspective(1600px) rotateX(72deg); }
+  to   { transform: perspective(1600px) rotateX(0deg); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
+    .resolve-section,
+    .about-section,
+    .services-section,
+    .process-section,
+    .area-section,
+    .location-section,
+    .gallery-section,
+    .diff-section,
+    .testimonials-section,
+    .faq-section {
+      transform-origin: center bottom;
+      backface-visibility: hidden;
+      animation: section-fold linear both;
+      animation-timeline: view();
+      /* começa quando o topo entra pelo rodapé, completa quando a
+         seção avançou ~38% da travessia — fold longo e visível */
+      animation-range: entry 0% cover 38%;
+    }
+  }
+}
+
+/* ====================================================================
    MARQUEE — faixa de cidades/coordenadas correndo
    ==================================================================== */
 .marquee {
