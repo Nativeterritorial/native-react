@@ -3,7 +3,7 @@ import Reveal from '../Reveal'
 
 // Componente reutilizável para o hero das landing pages.
 // Recebe props para customizar o conteúdo de cada página.
-function LPHero({ badge, breadcrumb, h1Main, h1Em, subtitle, ctaHref, ctaLabel = '💬 Solicitar orçamento' }) {
+function LPHero({ badge, breadcrumb, h1Main, h1Em, subtitle, ctaHref, ctaLabel = 'Solicitar orçamento' }) {
   return (
     <div className="lp-hero">
       <div className="container">

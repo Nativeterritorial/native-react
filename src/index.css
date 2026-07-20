@@ -1542,7 +1542,8 @@ section { position: relative; }
 }
 .diff-grid { counter-reset: diff-counter; }
 .diff-card:hover { background: var(--ink-2); }
-.diff-icon { font-size: 24px; margin-bottom: 40px; display: inline-block; opacity: 0.85; }
+.diff-icon { margin-bottom: 40px; display: inline-block; opacity: 0.85; }
+.diff-icon svg, .resolve-icon svg { display: block; }
 .diff-card h4 {
   font-family: var(--serif);
   font-size: clamp(20px, 1.5vw, 24px);

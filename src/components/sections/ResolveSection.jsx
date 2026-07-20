@@ -1,19 +1,20 @@
 import Reveal from '../Reveal'
+import Icon from '../icons'
 
 // Dados separados do JSX — boa prática para listas repetitivas
 const cards = [
   {
-    icon: '🌾',
+    icon: 'wheat',
     title: 'Proprietário rural',
     desc: 'Evita prejuízo por área errada, acelera regularização e melhora a segurança documental.',
   },
   {
-    icon: '🏢',
+    icon: 'building',
     title: 'Empresa / Investidor',
     desc: 'Compra, venda e implantação com documentação clara e menor risco técnico.',
   },
   {
-    icon: '⚖️',
+    icon: 'scale',
     title: 'Advogados e Cartórios',
     desc: 'Laudos, memoriais e documentação técnica com TRT para processos e registros imobiliários.',
   },
@@ -33,7 +34,7 @@ function ResolveSection() {
           {/* .map() transforma o array em elementos JSX — equivalente a um loop */}
           {cards.map((card) => (
             <div className="resolve-card" key={card.title}>
-              <div className="resolve-icon">{card.icon}</div>
+              <div className="resolve-icon"><Icon name={card.icon} /></div>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>
             </div>

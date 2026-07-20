@@ -1,4 +1,5 @@
 import LPHeader from '../components/layout/LPHeader'
+import Icon from '../components/icons'
 import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
@@ -111,10 +112,10 @@ const steps = [
 ]
 
 const diffs = [
-  { icon: '📐', title: 'Topografia que sustenta o projeto', desc: 'Levantamento com precisão GNSS e estação total — não levantamento de croqui. Reduz retrabalho na aprovação.' },
-  { icon: '🏞️', title: 'Ambiental conectado', desc: 'CAR, APP, supressão e licença ambiental tratados junto com a parte cartográfica — sem refazer levantamento depois.' },
-  { icon: '🤝', title: 'Conversa com prefeitura e cartório', desc: 'Conhecemos as exigências dos municípios da Serra Gaúcha e dos cartórios regionais — peças saem no padrão.' },
-  { icon: '✅', title: 'Conferência final', desc: 'Antes de cada escritura, conferência de lote pra blindar o empreendedor contra litígio futuro com comprador.' },
+  { icon: 'ruler', title: 'Topografia que sustenta o projeto', desc: 'Levantamento com precisão GNSS e estação total — não levantamento de croqui. Reduz retrabalho na aprovação.' },
+  { icon: 'mountains', title: 'Ambiental conectado', desc: 'CAR, APP, supressão e licença ambiental tratados junto com a parte cartográfica — sem refazer levantamento depois.' },
+  { icon: 'users', title: 'Conversa com prefeitura e cartório', desc: 'Conhecemos as exigências dos municípios da Serra Gaúcha e dos cartórios regionais — peças saem no padrão.' },
+  { icon: 'check', title: 'Conferência final', desc: 'Antes de cada escritura, conferência de lote pra blindar o empreendedor contra litígio futuro com comprador.' },
 ]
 
 const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
@@ -215,7 +216,7 @@ function Loteamentos() {
           <div className="lp-diff-grid">
             {diffs.map((d) => (
               <div className="lp-diff-item" key={d.title}>
-                <div className="diff-icon">{d.icon}</div>
+                <div className="diff-icon"><Icon name={d.icon} /></div>
                 <h4>{d.title}</h4>
                 <p>{d.desc}</p>
               </div>

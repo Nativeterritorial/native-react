@@ -4,7 +4,7 @@
 const geoCidades = {
   cotipora: {
     cidade: 'Cotiporã',
-    badge: '📍 Georreferenciamento · Cotiporã-RS',
+    badge: 'Georreferenciamento · Cotiporã-RS',
     breadcrumb: 'Georreferenciamento em Cotiporã',
     metaTitle: 'Georreferenciamento em Cotiporã | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Cotiporã-RS com precisão técnica, ART e atendimento direto. NATIVE — SIGEF/INCRA.',
@@ -27,7 +27,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Cotiporã e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Cotiporã com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades rurais da Serra Gaúcha.',
     regionTags: [
-      { label: '📍 Cotiporã', main: true },
+      { label: 'Cotiporã', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Fagundes Varela' },
@@ -49,7 +49,7 @@ const geoCidades = {
 
   'fagundes-varela': {
     cidade: 'Fagundes Varela',
-    badge: '📍 Georreferenciamento · Fagundes Varela-RS',
+    badge: 'Georreferenciamento · Fagundes Varela-RS',
     breadcrumb: 'Georreferenciamento em Fagundes Varela',
     metaTitle: 'Georreferenciamento em Fagundes Varela | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Fagundes Varela-RS com precisão técnica, ART e atendimento direto. NATIVE — SIGEF/INCRA.',
@@ -72,7 +72,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Fagundes Varela e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Fagundes Varela com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades rurais da Serra Gaúcha.',
     regionTags: [
-      { label: '📍 Fagundes Varela', main: true },
+      { label: 'Fagundes Varela', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Cotiporã' },
@@ -93,7 +93,7 @@ const geoCidades = {
 
   'nova-prata': {
     cidade: 'Nova Prata',
-    badge: '📍 Georreferenciamento · Nova Prata-RS',
+    badge: 'Georreferenciamento · Nova Prata-RS',
     breadcrumb: 'Georreferenciamento em Nova Prata',
     metaTitle: 'Georreferenciamento em Nova Prata | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Nova Prata-RS com precisão técnica, ART e atendimento direto. NATIVE — SIGEF/INCRA.',
@@ -116,7 +116,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Nova Prata e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Nova Prata com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades rurais da Serra Gaúcha.',
     regionTags: [
-      { label: '📍 Nova Prata', main: true },
+      { label: 'Nova Prata', main: true },
       { label: 'Veranópolis' },
       { label: 'Cotiporã' },
       { label: 'Fagundes Varela' },
@@ -137,7 +137,7 @@ const geoCidades = {
 
   'vila-flores': {
     cidade: 'Vila Flores',
-    badge: '📍 Georreferenciamento · Vila Flores-RS',
+    badge: 'Georreferenciamento · Vila Flores-RS',
     breadcrumb: 'Georreferenciamento em Vila Flores',
     metaTitle: 'Georreferenciamento em Vila Flores | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Vila Flores-RS com precisão técnica, ART e atendimento direto. NATIVE — SIGEF/INCRA.',
@@ -160,7 +160,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Vila Flores e região',
     regionSub: 'A NATIVE tem base em Veranópolis (aprox. 15km de Vila Flores) e atende com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades da Serra Gaúcha.',
     regionTags: [
-      { label: '📍 Vila Flores', main: true },
+      { label: 'Vila Flores', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Cotiporã' },
@@ -182,7 +182,7 @@ const geoCidades = {
 
   'nova-bassano': {
     cidade: 'Nova Bassano',
-    badge: '📍 Georreferenciamento · Nova Bassano-RS',
+    badge: 'Georreferenciamento · Nova Bassano-RS',
     breadcrumb: 'Georreferenciamento em Nova Bassano',
     metaTitle: 'Georreferenciamento em Nova Bassano | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Nova Bassano-RS com ART, SIGEF/INCRA e atendimento direto. NATIVE — base em Veranópolis.',
@@ -205,7 +205,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Nova Bassano e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Nova Bassano com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades rurais do nordeste gaúcho.',
     regionTags: [
-      { label: '📍 Nova Bassano', main: true },
+      { label: 'Nova Bassano', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Paraí' },
@@ -227,7 +227,7 @@ const geoCidades = {
 
   'nova-roma-do-sul': {
     cidade: 'Nova Roma do Sul',
-    badge: '📍 Georreferenciamento · Nova Roma do Sul-RS',
+    badge: 'Georreferenciamento · Nova Roma do Sul-RS',
     breadcrumb: 'Georreferenciamento em Nova Roma do Sul',
     metaTitle: 'Georreferenciamento em Nova Roma do Sul | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento rural em Nova Roma do Sul-RS com precisão técnica, ART e SIGEF/INCRA. NATIVE — atendimento direto com quem executa.',
@@ -250,7 +250,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Nova Roma do Sul e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Nova Roma do Sul com agilidade. Conhecemos o terreno, os cartórios e o INCRA regional.',
     regionTags: [
-      { label: '📍 Nova Roma do Sul', main: true },
+      { label: 'Nova Roma do Sul', main: true },
       { label: 'Veranópolis' },
       { label: 'Flores da Cunha' },
       { label: 'Nova Pádua' },
@@ -271,7 +271,7 @@ const geoCidades = {
 
   'protasio-alves': {
     cidade: 'Protásio Alves',
-    badge: '📍 Georreferenciamento · Protásio Alves-RS',
+    badge: 'Georreferenciamento · Protásio Alves-RS',
     breadcrumb: 'Georreferenciamento em Protásio Alves',
     metaTitle: 'Georreferenciamento em Protásio Alves | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Protásio Alves-RS com ART e certificação SIGEF/INCRA. NATIVE — atendimento direto.',
@@ -294,7 +294,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Protásio Alves e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Protásio Alves com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades da encosta superior.',
     regionTags: [
-      { label: '📍 Protásio Alves', main: true },
+      { label: 'Protásio Alves', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Guabiju' },
@@ -315,7 +315,7 @@ const geoCidades = {
 
   guabiju: {
     cidade: 'Guabiju',
-    badge: '📍 Georreferenciamento · Guabiju-RS',
+    badge: 'Georreferenciamento · Guabiju-RS',
     breadcrumb: 'Georreferenciamento em Guabiju',
     metaTitle: 'Georreferenciamento em Guabiju | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento rural em Guabiju-RS com precisão técnica, ART e SIGEF/INCRA. NATIVE — atendimento direto com quem executa.',
@@ -338,7 +338,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Guabiju e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Guabiju com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades dos campos de cima da serra.',
     regionTags: [
-      { label: '📍 Guabiju', main: true },
+      { label: 'Guabiju', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Protásio Alves' },
@@ -359,7 +359,7 @@ const geoCidades = {
 
   'sao-jorge': {
     cidade: 'São Jorge',
-    badge: '📍 Georreferenciamento · São Jorge-RS',
+    badge: 'Georreferenciamento · São Jorge-RS',
     breadcrumb: 'Georreferenciamento em São Jorge',
     metaTitle: 'Georreferenciamento em São Jorge | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em São Jorge-RS com ART, SIGEF/INCRA e atendimento direto. NATIVE — base em Veranópolis.',
@@ -382,7 +382,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em São Jorge e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende São Jorge com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades familiares da região.',
     regionTags: [
-      { label: '📍 São Jorge', main: true },
+      { label: 'São Jorge', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Guabiju' },
@@ -403,7 +403,7 @@ const geoCidades = {
 
   'vista-alegre-do-prata': {
     cidade: 'Vista Alegre do Prata',
-    badge: '📍 Georreferenciamento · Vista Alegre do Prata-RS',
+    badge: 'Georreferenciamento · Vista Alegre do Prata-RS',
     breadcrumb: 'Georreferenciamento em Vista Alegre do Prata',
     metaTitle: 'Georreferenciamento em Vista Alegre do Prata | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento rural em Vista Alegre do Prata-RS com precisão técnica, ART e SIGEF/INCRA. NATIVE — atendimento direto com quem executa.',
@@ -426,7 +426,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Vista Alegre do Prata e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Vista Alegre do Prata com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil colonial das propriedades locais.',
     regionTags: [
-      { label: '📍 Vista Alegre do Prata', main: true },
+      { label: 'Vista Alegre do Prata', main: true },
       { label: 'Veranópolis' },
       { label: 'Nova Prata' },
       { label: 'Protásio Alves' },
@@ -447,7 +447,7 @@ const geoCidades = {
 
   'antonio-prado': {
     cidade: 'Antônio Prado',
-    badge: '📍 Georreferenciamento · Antônio Prado-RS',
+    badge: 'Georreferenciamento · Antônio Prado-RS',
     breadcrumb: 'Georreferenciamento em Antônio Prado',
     metaTitle: 'Georreferenciamento em Antônio Prado | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento rural em Antônio Prado-RS com ART, SIGEF/INCRA e atendimento direto. NATIVE — precisão técnica na Serra Gaúcha.',
@@ -470,7 +470,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Antônio Prado e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Antônio Prado com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil colonial das propriedades da região.',
     regionTags: [
-      { label: '📍 Antônio Prado', main: true },
+      { label: 'Antônio Prado', main: true },
       { label: 'Veranópolis' },
       { label: 'Ipê' },
       { label: 'Flores da Cunha' },
@@ -492,7 +492,7 @@ const geoCidades = {
 
   ipe: {
     cidade: 'Ipê',
-    badge: '📍 Georreferenciamento · Ipê-RS',
+    badge: 'Georreferenciamento · Ipê-RS',
     breadcrumb: 'Georreferenciamento em Ipê',
     metaTitle: 'Georreferenciamento em Ipê | NATIVE Inteligência Territorial',
     metaDesc: 'Georreferenciamento de imóveis rurais em Ipê-RS com precisão técnica, ART e SIGEF/INCRA. NATIVE — atendimento direto com quem executa.',
@@ -515,7 +515,7 @@ const geoCidades = {
     regionTitle: 'Atendimento direto em Ipê e região',
     regionSub: 'A NATIVE tem base em Veranópolis e atende Ipê com agilidade. Conhecemos os cartórios, o INCRA regional e o perfil das propriedades dos campos de altitude.',
     regionTags: [
-      { label: '📍 Ipê', main: true },
+      { label: 'Ipê', main: true },
       { label: 'Veranópolis' },
       { label: 'Antônio Prado' },
       { label: 'Campestre da Serra' },

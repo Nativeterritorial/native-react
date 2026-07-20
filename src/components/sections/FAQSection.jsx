@@ -17,7 +17,7 @@ const faqs = [
         </p>
         <p style={{ marginTop: '12px' }}>
           <a href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.">
-            💬 Solicitar orçamento personalizado
+            Solicitar orçamento personalizado
           </a>
         </p>
       </>

@@ -1,4 +1,5 @@
 import LPHeader from '../components/layout/LPHeader'
+import Icon from '../components/icons'
 import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
@@ -123,10 +124,10 @@ const steps = [
 ]
 
 const diffs = [
-  { icon: '📐', title: 'Equipamento certo pra cada caso', desc: 'GNSS RTK pra campo aberto e estação total pra área urbana ou com obstrução de sinal — não é tudo medido do mesmo jeito.' },
-  { icon: '🧾', title: 'ART e responsabilidade técnica', desc: 'Cada planta sai com ART assinada pelo profissional que executou. Documento que vale em prefeitura, cartório e processo.' },
-  { icon: '📁', title: 'Entrega no formato certo', desc: 'PDF + DWG (quando o projetista precisa), planta com timbre técnico, memorial descritivo — peças que não voltam por exigência burocrática.' },
-  { icon: '🤝', title: 'Atendimento direto', desc: 'Você fala com o técnico que vai a campo. Sem intermediário, sem orçamento de empresa terceirizado, sem responsabilidade diluída.' },
+  { icon: 'ruler', title: 'Equipamento certo pra cada caso', desc: 'GNSS RTK pra campo aberto e estação total pra área urbana ou com obstrução de sinal — não é tudo medido do mesmo jeito.' },
+  { icon: 'doc', title: 'ART e responsabilidade técnica', desc: 'Cada planta sai com ART assinada pelo profissional que executou. Documento que vale em prefeitura, cartório e processo.' },
+  { icon: 'folder', title: 'Entrega no formato certo', desc: 'PDF + DWG (quando o projetista precisa), planta com timbre técnico, memorial descritivo — peças que não voltam por exigência burocrática.' },
+  { icon: 'users', title: 'Atendimento direto', desc: 'Você fala com o técnico que vai a campo. Sem intermediário, sem orçamento de empresa terceirizado, sem responsabilidade diluída.' },
 ]
 
 const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
@@ -230,7 +231,7 @@ function Topografia() {
           <div className="lp-diff-grid">
             {diffs.map((d) => (
               <div className="lp-diff-item" key={d.title}>
-                <div className="diff-icon">{d.icon}</div>
+                <div className="diff-icon"><Icon name={d.icon} /></div>
                 <h4>{d.title}</h4>
                 <p>{d.desc}</p>
               </div>

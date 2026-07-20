@@ -1,4 +1,5 @@
 import LPHeader from '../components/layout/LPHeader'
+import Icon from '../components/icons'
 import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
@@ -131,10 +132,10 @@ const steps = [
 ]
 
 const diffs = [
-  { icon: '🛰️', title: 'GNSS RTK em todo o perímetro', desc: 'Precisão centimétrica obrigatória pelo INCRA. Não fazemos georref. com receptor básico — não passa no SIGEF.' },
-  { icon: '📑', title: 'Acompanhamento até certificar', desc: 'Não entregamos peça e sumimos. Acompanhamos a submissão no SIGEF e respondemos eventuais exigências do INCRA-RS.' },
-  { icon: '🗺️', title: 'Conhecimento do território', desc: 'Atuamos há anos na Serra Gaúcha — conhecemos cartórios, particularidades regionais e o INCRA-RS. Reduz fricção.' },
-  { icon: '🤝', title: 'Direto com o técnico', desc: 'Você fala com quem vai a campo, processa e assina a ART. Sem comercial, sem terceirização, sem responsabilidade diluída.' },
+  { icon: 'satellite', title: 'GNSS RTK em todo o perímetro', desc: 'Precisão centimétrica obrigatória pelo INCRA. Não fazemos georref. com receptor básico — não passa no SIGEF.' },
+  { icon: 'doc', title: 'Acompanhamento até certificar', desc: 'Não entregamos peça e sumimos. Acompanhamos a submissão no SIGEF e respondemos eventuais exigências do INCRA-RS.' },
+  { icon: 'map', title: 'Conhecimento do território', desc: 'Atuamos há anos na Serra Gaúcha — conhecemos cartórios, particularidades regionais e o INCRA-RS. Reduz fricção.' },
+  { icon: 'users', title: 'Direto com o técnico', desc: 'Você fala com quem vai a campo, processa e assina a ART. Sem comercial, sem terceirização, sem responsabilidade diluída.' },
 ]
 
 const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
@@ -238,7 +239,7 @@ function Georreferenciamento() {
           <div className="lp-diff-grid">
             {diffs.map((d) => (
               <div className="lp-diff-item" key={d.title}>
-                <div className="diff-icon">{d.icon}</div>
+                <div className="diff-icon"><Icon name={d.icon} /></div>
                 <h4>{d.title}</h4>
                 <p>{d.desc}</p>
               </div>

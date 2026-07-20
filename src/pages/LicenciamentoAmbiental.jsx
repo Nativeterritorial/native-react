@@ -1,4 +1,5 @@
 import LPHeader from '../components/layout/LPHeader'
+import Icon from '../components/icons'
 import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
 import TrustBar from '../components/layout/TrustBar'
@@ -123,10 +124,10 @@ const steps = [
 ]
 
 const diffs = [
-  { icon: '🗺️', title: 'CAR feito com georreferenciamento real', desc: 'A maioria do mercado faz CAR no croqui aproximado e gera passivo. A NATIVE usa o levantamento topográfico real do imóvel.' },
-  { icon: '⚖️', title: 'Suporte técnico pra defesa', desc: 'Recebeu multa? A gente faz laudo, PRAD e subsídio técnico pra seu advogado conduzir a defesa com base sólida.' },
-  { icon: '🌱', title: 'Foco no encaminhamento', desc: 'Não complicamos pra cobrar mais. O objetivo é destravar o uso do imóvel pelo caminho técnico mais curto e seguro.' },
-  { icon: '📋', title: 'ART em tudo', desc: 'Cada laudo, projeto, cadastro ou levantamento sai com ART assinada pelo profissional responsável. Documento de verdade.' },
+  { icon: 'map', title: 'CAR feito com georreferenciamento real', desc: 'A maioria do mercado faz CAR no croqui aproximado e gera passivo. A NATIVE usa o levantamento topográfico real do imóvel.' },
+  { icon: 'scale', title: 'Suporte técnico pra defesa', desc: 'Recebeu multa? A gente faz laudo, PRAD e subsídio técnico pra seu advogado conduzir a defesa com base sólida.' },
+  { icon: 'sprout', title: 'Foco no encaminhamento', desc: 'Não complicamos pra cobrar mais. O objetivo é destravar o uso do imóvel pelo caminho técnico mais curto e seguro.' },
+  { icon: 'doc', title: 'ART em tudo', desc: 'Cada laudo, projeto, cadastro ou levantamento sai com ART assinada pelo profissional responsável. Documento de verdade.' },
 ]
 
 const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
@@ -234,7 +235,7 @@ function LicenciamentoAmbiental() {
           <div className="lp-diff-grid">
             {diffs.map((d) => (
               <div className="lp-diff-item" key={d.title}>
-                <div className="diff-icon">{d.icon}</div>
+                <div className="diff-icon"><Icon name={d.icon} /></div>
                 <h4>{d.title}</h4>
                 <p>{d.desc}</p>
               </div>

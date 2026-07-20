@@ -1,21 +1,23 @@
+import Icon from '../icons'
+
 const diffs = [
   {
-    icon: '🎯',
+    icon: 'target',
     title: 'Precisão nos dados',
     desc: 'Equipamentos GNSS e processamento rigoroso em campo e escritório.',
   },
   {
-    icon: '🛡️',
+    icon: 'shield',
     title: 'Responsabilidade técnica',
     desc: 'TRT assinado e respaldo legal completo em todos os serviços.',
   },
   {
-    icon: '💬',
+    icon: 'chat',
     title: 'Comunicação direta',
     desc: 'Você fala direto com quem executa o serviço, sem intermediários.',
   },
   {
-    icon: '📍',
+    icon: 'pin',
     title: 'Base na região',
     desc: 'Conhecemos a Serra Gaúcha, os cartórios e os órgãos locais.',
   },
@@ -37,7 +39,7 @@ function DiffSection() {
         <div className="diff-grid">
           {diffs.map((diff) => (
             <div className="diff-card" key={diff.title}>
-              <div className="diff-icon">{diff.icon}</div>
+              <div className="diff-icon"><Icon name={diff.icon} /></div>
               <h4>{diff.title}</h4>
               <p>{diff.desc}</p>
             </div>

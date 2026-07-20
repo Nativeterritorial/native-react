@@ -1,4 +1,5 @@
 import { useParams, Navigate } from 'react-router-dom'
+import Icon from '../components/icons'
 import LPHeader from '../components/layout/LPHeader'
 import LPFooter from '../components/layout/LPFooter'
 import LPHero from '../components/layout/LPHero'
@@ -19,10 +20,10 @@ const trustItems = [
 ]
 
 const geoServices = [
-  { icon: '📐', title: 'Georreferenciamento rural — SIGEF/INCRA', desc: 'Levantamento de campo com GNSS, processamento dos dados, memorial descritivo e certificação no SIGEF conforme normas do INCRA.' },
-  { icon: '🗺️', title: 'Levantamento topográfico', desc: 'Plantas, mapas, cotas e conferência de área para imóveis rurais, terrenos e projetos que precisam de base técnica precisa.' },
-  { icon: '📋', title: 'Memorial descritivo e ART', desc: 'Documentação técnica completa com memorial, planta georreferenciada e ART assinada para uso em cartório e INCRA.' },
-  { icon: '🤝', title: 'Orientação pós-entrega', desc: 'Explicação clara sobre os próximos passos — o que levar ao cartório, como avançar no INCRA, o que preparar.' },
+  { icon: 'ruler', title: 'Georreferenciamento rural — SIGEF/INCRA', desc: 'Levantamento de campo com GNSS, processamento dos dados, memorial descritivo e certificação no SIGEF conforme normas do INCRA.' },
+  { icon: 'map', title: 'Levantamento topográfico', desc: 'Plantas, mapas, cotas e conferência de área para imóveis rurais, terrenos e projetos que precisam de base técnica precisa.' },
+  { icon: 'doc', title: 'Memorial descritivo e ART', desc: 'Documentação técnica completa com memorial, planta georreferenciada e ART assinada para uso em cartório e INCRA.' },
+  { icon: 'users', title: 'Orientação pós-entrega', desc: 'Explicação clara sobre os próximos passos — o que levar ao cartório, como avançar no INCRA, o que preparar.' },
 ]
 
 const WA = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
@@ -110,7 +111,7 @@ function GeoCidade() {
         h1Em={data.h1Em}
         subtitle={data.heroSub}
         ctaHref={WA}
-        ctaLabel="💬 Solicitar orçamento"
+        ctaLabel="Solicitar orçamento"
       />
 
       <TrustBar items={trustItems} />
@@ -141,7 +142,7 @@ function GeoCidade() {
           <div className="lp-cards-grid" style={{ marginTop: '40px' }}>
             {geoServices.map((s) => (
               <div className="lp-card-plain" key={s.title}>
-                <div style={{ fontSize: '22px', marginBottom: '12px' }}>{s.icon}</div>
+                <div style={{ marginBottom: '12px' }}><Icon name={s.icon} size={24} /></div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
               </div>
@@ -204,7 +205,7 @@ function GeoCidade() {
           <h2 className="section-title">{data.ctaTitle}</h2>
           <p className="cta-sub">{data.ctaSub}</p>
           <a href={WA} className="btn-primary" target="_blank" rel="noopener noreferrer" style={{ fontSize: '16px', padding: '16px 32px' }}>
-            💬 Falar no WhatsApp
+            Falar no WhatsApp
           </a>
           <div className="lp-cta-meta">
             <strong>NATIVE Inteligência Territorial e Ambiental</strong><br />
