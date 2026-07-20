@@ -45,8 +45,8 @@ function Hero() {
 
           <div className="hero-stats">
             <div className="stat-item">
-              <CountUp className="stat-num accent" value="+1.000" />
-              <span className="stat-label">hectares · serra gaúcha</span>
+              <span className="stat-num accent">RTK</span>
+              <span className="stat-label">precisão centimétrica</span>
             </div>
             <div className="stat-item">
               <CountUp className="stat-num" value="13" />

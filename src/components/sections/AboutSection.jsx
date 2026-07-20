@@ -30,12 +30,12 @@ function AboutSection() {
         <div className="about-header">
           <div className="section-label">Quem faz</div>
           <Reveal as="h2" className="section-title" id="about-title">
-            A NATIVE é feita por <em>duas pessoas</em>
+            A NATIVE é conduzida <em>pelos sócios</em>
           </Reveal>
           <p className="section-sub">
             Atendimento direto, sem terceirização. Você fala com quem assina a ART, conduz
-            o processo e entrega o trabalho. Os dois sócios atuam de ponta a ponta —
-            cada um na sua frente.
+            o processo e entrega o trabalho. Os sócios respondem tecnicamente por cada
+            serviço — com o apoio da equipe em campo e no escritório.
           </p>
         </div>
 
@@ -69,8 +69,8 @@ function AboutSection() {
 
         <div className="about-cta">
           <p className="about-cta-text">
-            Os dois trabalham com responsabilidade técnica. Cada serviço sai com ART
-            assinada. Cada processo tem um nome próprio acompanhando do começo ao fim.
+            Todo serviço sai com ART assinada pelos responsáveis técnicos. Cada processo
+            tem um nome próprio acompanhando do começo ao fim.
           </p>
           <a
             href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."

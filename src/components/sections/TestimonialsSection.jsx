@@ -2,7 +2,7 @@ import Reveal from '../Reveal'
 import CountUp from '../CountUp'
 
 const stats = [
-  { number: '+1.000', label: 'hectares georreferenciados' },
+  { number: 'RTK', label: 'GNSS de precisão centimétrica' },
   { number: '13', label: 'cidades atendidas na Serra Gaúcha' },
   { number: 'SIGEF', label: 'certificação oficial INCRA' },
   { number: 'ART', label: 'em todos os serviços' },
