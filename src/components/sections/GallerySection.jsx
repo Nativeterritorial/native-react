@@ -1,9 +1,9 @@
 const images = [
-  { src: '/images/aerial.jpg',    alt: 'Vista aérea Serra Gaúcha',         main: true },
-  { src: '/images/campo-1.jpg',   alt: 'GNSS em campo' },
-  { src: '/images/campo-2.jpg',   alt: 'Equipe em levantamento' },
-  { src: '/images/campo-3.jpg',   alt: 'Anotações técnicas em campo' },
-  { src: '/images/ambiental-1.jpg', alt: 'Vistoria ambiental' },
+  { src: '/images/galeria-aerea-loteamento.jpg', alt: 'Vista aérea de loteamento em execução na Serra Gaúcha', main: true },
+  { src: '/images/galeria-gnss-vale.jpg', alt: 'Receptor GNSS RTK em levantamento no vale' },
+  { src: '/images/galeria-levantamento-campo.jpg', alt: 'Levantamento em campo com tripé e receptor GNSS' },
+  { src: '/images/galeria-ambiental-araucaria.jpg', alt: 'Vistoria ambiental junto a araucária' },
+  { src: '/images/galeria-marco-vertice.jpg', alt: 'Marco de vértice credenciado implantado em campo' },
 ]
 
 function GallerySection() {
