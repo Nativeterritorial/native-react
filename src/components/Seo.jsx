@@ -7,7 +7,7 @@ function Seo({
   title,
   description,
   canonical,
-  ogImage = 'https://nativeterritorial.com.br/images/aerial.jpg',
+  ogImage = 'https://nativeterritorial.com.br/images/og-native.jpg',
   ogType = 'website',
   jsonLd,
 }) {
