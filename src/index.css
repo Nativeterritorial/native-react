@@ -1658,9 +1658,18 @@ section { position: relative; }
 .cta-section .btn-primary {
   background: var(--paper);
   color: var(--moss);
-  margin-top: 16px;
 }
 .cta-section .btn-primary:hover { background: var(--terracotta); color: var(--paper); }
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+.cta-section .btn-ghost { border-color: rgba(245,241,232,0.3); }
+.cta-section .btn-ghost:hover { border-color: var(--terracotta); }
 
 .cta-info {
   display: grid;

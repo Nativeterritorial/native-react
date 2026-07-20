@@ -15,6 +15,14 @@ const IconPin = () => (
   </svg>
 )
 
+const IconDoc = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14 3H7a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 7 21h10a1.5 1.5 0 0 0 1.5-1.5V7.5L14 3z" />
+    <path d="M14 3v4.5h4.5" />
+    <path d="M9 13h6M9 16.5h6" />
+  </svg>
+)
+
 const IconWhats = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.6-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 1.8.7 2.5.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z" />
@@ -32,17 +40,28 @@ function CTASection() {
           objetivo da demanda. Respondemos rápido e com clareza.
         </p>
 
-        <Magnetic strength={0.4}>
+        <div className="cta-actions">
+          <Magnetic strength={0.4}>
+            <a
+              href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+              className="btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="btn-icon"><IconWhats /></span>
+              Falar no WhatsApp
+            </a>
+          </Magnetic>
           <a
-            href="https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
-            className="btn-primary"
+            href="/portfolio-native.pdf"
+            className="btn-ghost"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="btn-icon"><IconWhats /></span>
-            Falar no WhatsApp
+            <span className="btn-icon"><IconDoc /></span>
+            Baixar portfólio (PDF)
           </a>
-        </Magnetic>
+        </div>
 
         <div className="cta-info">
           <div className="cta-info-item">
