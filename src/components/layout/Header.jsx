@@ -14,7 +14,7 @@ function Header() {
     <header className={scrolled ? 'scrolled' : ''}>
       <div className="container nav-inner">
         <a href="#" className="nav-logo">
-          <img src="/images/logo.png" alt="NATIVE" />
+          <img src="/images/logo-nav.png" alt="NATIVE" />
           <span>
             NATIVE
             <span className="logo-accent">Inteligência Territorial</span>
