@@ -10,6 +10,7 @@ import ProcessSection from '../components/sections/ProcessSection'
 import AreaSection from '../components/sections/AreaSection'
 import LocationSection from '../components/sections/LocationSection'
 import GallerySection from '../components/sections/GallerySection'
+import CasesSection from '../components/sections/CasesSection'
 import DiffSection from '../components/sections/DiffSection'
 import TestimonialsSection from '../components/sections/TestimonialsSection'
 import FAQSection from '../components/sections/FAQSection'
@@ -58,6 +59,7 @@ function Home() {
         <AreaSection />
         <LocationSection />
         <GallerySection />
+        <CasesSection />
         <DiffSection />
         <TestimonialsSection />
         <FAQSection />
