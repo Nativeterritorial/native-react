@@ -3,10 +3,15 @@ const WA_URL = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site
 function WhatsAppFloat() {
   const handleClick = () => {
     if (window.gtag) {
+      // Conversão do Google Ads
       window.gtag('event', 'conversion', {
         'send_to': 'AW-18051450854/XfrNCOb3kaIcEOaPzZ9D',
         'value': 1.0,
         'currency': 'BRL'
+      })
+      // Evento do Google Analytics (relatório mensal: contatos gerados)
+      window.gtag('event', 'whatsapp_click', {
+        page_path: window.location.pathname
       })
     }
   }
