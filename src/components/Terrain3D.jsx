@@ -3,15 +3,17 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 // three.js fica em chunk próprio — só baixa quando a seção se aproxima
 // da tela e o navegador está ocioso, sem competir com o primeiro paint.
 const TerrainScene = lazy(() => import('./TerrainScene'))
+const OrthoScene = lazy(() => import('./OrthoScene'))
 
 /**
  * Terrain3D — camada de fundo com a maquete 3D da propriedade rural.
  * Deve ficar dentro de um pai com position: relative.
  *
- * seed: número — muda a paisagem gerada
+ * variant: 'rural' (maquete ilustrada) | 'orto' (levantamento real: ortofoto + relevo)
+ * seed: número — muda a paisagem gerada (variant 'rural')
  * focus: true destaca o imóvel (divisa, marcos, sede); false mostra só a paisagem
  */
-function Terrain3D({ seed = 0, focus = true, className = '', onReady, onElevation }) {
+function Terrain3D({ variant = 'rural', seed = 0, focus = true, className = '', onReady, onElevation }) {
   const ref = useRef(null)
   const [load, setLoad] = useState(false)
   const [ready, setReady] = useState(false)
@@ -60,7 +62,11 @@ function Terrain3D({ seed = 0, focus = true, className = '', onReady, onElevatio
     >
       {load && (
         <Suspense fallback={null}>
-          <TerrainScene seed={seed} focus={focus} onReady={handleReady} onElevation={onElevation} />
+          {variant === 'orto' ? (
+            <OrthoScene onReady={handleReady} onElevation={onElevation} />
+          ) : (
+            <TerrainScene seed={seed} focus={focus} onReady={handleReady} onElevation={onElevation} />
+          )}
         </Suspense>
       )}
     </div>

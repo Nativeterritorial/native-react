@@ -24,7 +24,7 @@ function Hero() {
     <section className={`hero${ready3d ? ' has-3d' : ''}`} aria-labelledby="hero-title">
       <div className="hero-bg">
         <img src="/images/rural-hero.jpg" alt="" aria-hidden="true" />
-        <Terrain3D onReady={handleReady} onElevation={handleElevation} />
+        <Terrain3D variant="orto" onReady={handleReady} onElevation={handleElevation} />
       </div>
 
       <div className="hero-coord" aria-hidden="true">
