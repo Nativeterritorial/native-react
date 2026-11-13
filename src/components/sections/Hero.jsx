@@ -1,17 +1,36 @@
+import { useCallback, useRef, useState } from 'react'
 import Reveal from '../Reveal'
 import Magnetic from '../Magnetic'
 import CountUp from '../CountUp'
+import Terrain3D from '../Terrain3D'
+
+const fmtCota = new Intl.NumberFormat('pt-BR', {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+})
 
 function Hero() {
+  const [ready3d, setReady3d] = useState(false)
+  const cotaRef = useRef(null)
+
+  const handleReady = useCallback(() => setReady3d(true), [])
+  const handleElevation = useCallback((alt) => {
+    const el = cotaRef.current
+    if (!el) return
+    el.textContent = alt == null ? '' : `Cota ${fmtCota.format(alt)} m`
+  }, [])
+
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section className={`hero${ready3d ? ' has-3d' : ''}`} aria-labelledby="hero-title">
       <div className="hero-bg">
         <img src="/images/aerial.jpg" alt="" aria-hidden="true" />
+        <Terrain3D onReady={handleReady} onElevation={handleElevation} />
       </div>
 
       <div className="hero-coord" aria-hidden="true">
         <strong>28°56′13″ S</strong>
         51°33′23″ W
+        <span className="hero-cota" ref={cotaRef} />
       </div>
 
       <div className="container">

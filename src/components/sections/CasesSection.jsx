@@ -1,4 +1,5 @@
 import Reveal from '../Reveal'
+import Tilt from '../Tilt'
 
 const cases = [
   {
@@ -36,9 +37,9 @@ function CasesSection() {
         <div className="cases-grid">
           {cases.map((c) => (
             <article className="case-card" key={c.title}>
-              <div className="case-doc">
+              <Tilt className="case-doc" max={5}>
                 <img src={c.img} alt={c.alt} loading="lazy" />
-              </div>
+              </Tilt>
               <div className="case-tag">{c.tag}</div>
               <h3>{c.title}</h3>
               <p>{c.desc}</p>

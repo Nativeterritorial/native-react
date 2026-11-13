@@ -1,0 +1,70 @@
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+
+// three.js fica em chunk próprio — só baixa quando a seção se aproxima
+// da tela e o navegador está ocioso, sem competir com o primeiro paint.
+const TerrainScene = lazy(() => import('./TerrainScene'))
+
+/**
+ * Terrain3D — camada de fundo com o relevo 3D.
+ * Deve ficar dentro de um pai com position: relative.
+ *
+ * mode: 'contours' (curvas de nível + perímetro) | 'points' (nuvem de pontos)
+ * seed: número — muda o relevo gerado
+ */
+function Terrain3D({ mode = 'contours', seed = 0, className = '', onReady, onElevation }) {
+  const ref = useRef(null)
+  const [load, setLoad] = useState(false)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let idle = 0
+    const schedule = () => {
+      idle = window.requestIdleCallback
+        ? window.requestIdleCallback(() => setLoad(true), { timeout: 1500 })
+        : window.setTimeout(() => setLoad(true), 300)
+    }
+    let observer
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            observer.disconnect()
+            schedule()
+          }
+        },
+        { rootMargin: '400px' }
+      )
+      observer.observe(el)
+    } else {
+      schedule()
+    }
+    return () => {
+      observer?.disconnect()
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle)
+      else window.clearTimeout(idle)
+    }
+  }, [])
+
+  const handleReady = useCallback(() => {
+    setReady(true)
+    onReady?.()
+  }, [onReady])
+
+  return (
+    <div
+      ref={ref}
+      className={`terrain-3d terrain-3d--${mode}${ready ? ' is-on' : ''} ${className}`.trim()}
+      aria-hidden="true"
+    >
+      {load && (
+        <Suspense fallback={null}>
+          <TerrainScene mode={mode} seed={seed} onReady={handleReady} onElevation={onElevation} />
+        </Suspense>
+      )}
+    </div>
+  )
+}
+
+export default Terrain3D

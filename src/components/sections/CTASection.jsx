@@ -1,5 +1,6 @@
 import Reveal from '../Reveal'
 import Magnetic from '../Magnetic'
+import Terrain3D from '../Terrain3D'
 
 const IconMail = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -32,6 +33,7 @@ const IconWhats = () => (
 function CTASection() {
   return (
     <section id="contato" className="cta-section" aria-labelledby="cta-title">
+      <Terrain3D mode="points" seed={7} />
       <div className="container">
         <div className="section-label">Contato</div>
         <Reveal as="h2" className="section-title" id="cta-title">Fale com a NATIVE</Reveal>

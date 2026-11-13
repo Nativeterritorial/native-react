@@ -430,6 +430,63 @@ header nav a:hover::before { width: 100%; }
   mix-blend-mode: screen;
 }
 
+/* Relevo 3D (three.js) — entra por cima da foto quando o WebGL está pronto */
+.hero-bg img,
+.hero-bg::after { transition: opacity 1.4s ease; }
+.hero.has-3d .hero-bg img { opacity: 0.07; }
+.hero.has-3d .hero-bg::after { opacity: 0; }
+.terrain-3d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.terrain-3d.is-on { opacity: 1; }
+.terrain-3d-canvas { position: absolute; inset: 0; }
+.terrain-3d-canvas canvas { display: block; width: 100%; height: 100%; }
+/* véu para manter o texto legível sobre o relevo */
+.terrain-3d::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 82%, transparent) 0%, color-mix(in srgb, var(--ink) 45%, transparent) 38%, transparent 68%),
+    linear-gradient(0deg, color-mix(in srgb, var(--ink) 80%, transparent) 0%, transparent 34%);
+}
+/* CTA: nuvem de pontos sobre o fundo --moss */
+.cta-section .terrain-3d::after {
+  background: linear-gradient(90deg, var(--moss) 0%, color-mix(in srgb, var(--moss) 55%, transparent) 40%, transparent 72%);
+}
+.lp-hero::before,
+.cta-section::before { transition: opacity 1.2s ease; }
+.lp-hero:has(.terrain-3d.is-on)::before,
+.cta-section:has(.terrain-3d.is-on)::before { opacity: 0; }
+
+/* Tilt — cards que inclinam em 3D com o cursor */
+.tilt { position: relative; will-change: transform; }
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.13), transparent 60%);
+}
+.tilt.is-tilting .tilt-glare { opacity: 1; }
+.case-doc.tilt.is-tilting { box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7); }
+.case-doc .tilt-glare { background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, var(--terracotta) 18%, transparent), transparent 60%); }
+
+.hero-cota {
+  display: block;
+  min-height: 1.7em;
+  margin-top: 4px;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
 .hero-content { position: relative; z-index: 2; }
 
 /* Coordenadas no canto superior */

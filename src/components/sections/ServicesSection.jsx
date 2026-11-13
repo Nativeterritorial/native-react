@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../Reveal'
+import Tilt from '../Tilt'
 
 const services = [
   {
@@ -54,7 +55,7 @@ function ServicesSection() {
 
         <div className="services-grid services-grid-4">
           {services.map((service, i) => (
-            <div className="service-card fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={service.tag}>
+            <Tilt className="service-card fade-in" style={{ transitionDelay: `${i * 80}ms` }} key={service.tag}>
               <div className="service-card-img">
                 <img src={service.img} alt={service.imgAlt} loading="lazy" />
               </div>
@@ -64,7 +65,7 @@ function ServicesSection() {
                 <p>{service.desc}</p>
                 <Link to={service.link} className="service-link">Saiba mais →</Link>
               </div>
-            </div>
+            </Tilt>
           ))}
         </div>
       </div>
