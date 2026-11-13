@@ -33,7 +33,7 @@ const IconWhats = () => (
 function CTASection() {
   return (
     <section id="contato" className="cta-section" aria-labelledby="cta-title">
-      <Terrain3D mode="points" seed={7} />
+      <Terrain3D seed={7} focus={false} />
       <div className="container">
         <div className="section-label">Contato</div>
         <Reveal as="h2" className="section-title" id="cta-title">Fale com a NATIVE</Reveal>

@@ -455,9 +455,12 @@ header nav a:hover::before { width: 100%; }
     linear-gradient(90deg, color-mix(in srgb, var(--ink) 82%, transparent) 0%, color-mix(in srgb, var(--ink) 45%, transparent) 38%, transparent 68%),
     linear-gradient(0deg, color-mix(in srgb, var(--ink) 80%, transparent) 0%, transparent 34%);
 }
-/* CTA: nuvem de pontos sobre o fundo --moss */
+/* CTA: paisagem sobre o fundo --moss */
+.cta-section { --terrain-bg: var(--moss); }
 .cta-section .terrain-3d::after {
-  background: linear-gradient(90deg, var(--moss) 0%, color-mix(in srgb, var(--moss) 55%, transparent) 40%, transparent 72%);
+  background:
+    linear-gradient(90deg, var(--moss) 0%, color-mix(in srgb, var(--moss) 55%, transparent) 40%, transparent 72%),
+    linear-gradient(0deg, var(--moss) 0%, color-mix(in srgb, var(--moss) 78%, transparent) 30%, transparent 58%);
 }
 .lp-hero::before,
 .cta-section::before { transition: opacity 1.2s ease; }

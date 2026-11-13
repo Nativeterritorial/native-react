@@ -5,13 +5,13 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 const TerrainScene = lazy(() => import('./TerrainScene'))
 
 /**
- * Terrain3D — camada de fundo com o relevo 3D.
+ * Terrain3D — camada de fundo com a maquete 3D da propriedade rural.
  * Deve ficar dentro de um pai com position: relative.
  *
- * mode: 'contours' (curvas de nível + perímetro) | 'points' (nuvem de pontos)
- * seed: número — muda o relevo gerado
+ * seed: número — muda a paisagem gerada
+ * focus: true destaca o imóvel (divisa, marcos, sede); false mostra só a paisagem
  */
-function Terrain3D({ mode = 'contours', seed = 0, className = '', onReady, onElevation }) {
+function Terrain3D({ seed = 0, focus = true, className = '', onReady, onElevation }) {
   const ref = useRef(null)
   const [load, setLoad] = useState(false)
   const [ready, setReady] = useState(false)
@@ -55,12 +55,12 @@ function Terrain3D({ mode = 'contours', seed = 0, className = '', onReady, onEle
   return (
     <div
       ref={ref}
-      className={`terrain-3d terrain-3d--${mode}${ready ? ' is-on' : ''} ${className}`.trim()}
+      className={`terrain-3d${ready ? ' is-on' : ''} ${className}`.trim()}
       aria-hidden="true"
     >
       {load && (
         <Suspense fallback={null}>
-          <TerrainScene mode={mode} seed={seed} onReady={handleReady} onElevation={onElevation} />
+          <TerrainScene seed={seed} focus={focus} onReady={handleReady} onElevation={onElevation} />
         </Suspense>
       )}
     </div>

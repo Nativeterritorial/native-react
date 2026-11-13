@@ -1,40 +1,77 @@
 import { useEffect, useRef } from 'react'
 import {
-  AdditiveBlending,
+  BoxGeometry,
   BufferAttribute,
   BufferGeometry,
   Color,
+  ConeGeometry,
+  CylinderGeometry,
+  DirectionalLight,
+  DoubleSide,
   Group,
+  HemisphereLight,
+  IcosahedronGeometry,
+  InstancedMesh,
   LineBasicMaterial,
   LineSegments,
   Mesh,
+  MeshBasicMaterial,
+  MeshLambertMaterial,
+  Object3D,
   PerspectiveCamera,
   PlaneGeometry,
   Points,
   PointsMaterial,
   Raycaster,
   RingGeometry,
-  MeshBasicMaterial,
   Scene,
   ShaderMaterial,
   Vector2,
   Vector3,
+  Vector4,
   WebGLRenderer,
-  DoubleSide,
 } from 'three'
 import { Line2 } from 'three/addons/lines/Line2.js'
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js'
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js'
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
 
 /* ------------------------------------------------------------------
-   Relevo procedural — planalto com vale encaixado, no espírito da Serra.
-   A mesma função alimenta a malha, o perímetro e a leitura de cota.
+   Maquete de uma propriedade rural da Serra: relevo procedural com
+   talhões (lavoura, pasto, parreiral, mata), rio com mata ciliar,
+   açude, sede com galpão e silo, araucárias e a divisa com marcos.
+   As mesmas funções alimentam a malha, os objetos e a leitura de cota.
    ------------------------------------------------------------------ */
 const SIZE = 16
 const RADIUS = SIZE / 2
 const INTERVAL = 0.11 // equidistância das curvas (unidades do modelo)
 const BASE_ALT = 705 // altitude aproximada de Veranópolis (m)
 const M_PER_UNIT = 38
+const NC = 20 // talhões (células de Voronoi)
+
+// Uso do solo de cada talhão
+const PASTO = 0
+const MATA = 5
+const USES = [0, 0, 0, 1, 1, 2, 3, 3, 4, 4, 5] // sorteio ponderado
+
+// Perímetro do imóvel (coordenadas locais x,z)
+const PARCEL = [
+  [-1.7, -1.0],
+  [0.1, -1.7],
+  [1.8, -0.8],
+  [2.0, 0.8],
+  [0.4, 1.5],
+  [-1.5, 0.9],
+]
+const POND = { x: -0.7, z: 0.3, r: 0.27 } // açude
+const YARD = { x: 0.95, z: -0.45, r: 0.36 } // pátio da sede
+const ROAD = [
+  [YARD.x, YARD.z],
+  [1.25, -1.05],
+  [2.2, -2.4],
+  [2.7, -4.8],
+]
+const SUN = new Vector3(-0.55, 0.62, 0.45).normalize()
 
 function hash(x, y) {
   const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453
@@ -64,30 +101,101 @@ function fbm(x, y) {
   }
   return sum
 }
-// cada seed gera um relevo diferente (uma "folha" por página)
-function makeHeight(seed) {
+const smooth = (a, b, x) => {
+  const t = Math.min(Math.max((x - a) / (b - a), 0), 1)
+  return t * t * (3 - 2 * t)
+}
+function inParcel(x, z) {
+  let inside = false
+  for (let i = 0, j = PARCEL.length - 1; i < PARCEL.length; j = i++) {
+    const [ax, az] = PARCEL[i]
+    const [bx, bz] = PARCEL[j]
+    if (az > z !== bz > z && x < ((bx - ax) * (z - az)) / (bz - az) + ax) inside = !inside
+  }
+  return inside
+}
+function distToRoad(x, z) {
+  let best = Infinity
+  for (let i = 0; i < ROAD.length - 1; i++) {
+    const [ax, az] = ROAD[i]
+    const [bx, bz] = ROAD[i + 1]
+    const dx = bx - ax
+    const dz = bz - az
+    const t = Math.min(Math.max(((x - ax) * dx + (z - az) * dz) / (dx * dx + dz * dz), 0), 1)
+    best = Math.min(best, Math.hypot(x - ax - dx * t, z - az - dz * t))
+  }
+  return best
+}
+
+// cada seed gera uma paisagem diferente (uma "folha" por página)
+function makeLand(seed) {
   const ox = 3.1 + seed * 17.3
   const oz = 7.7 + seed * 9.1
   const phase = 0.6 + seed * 1.7
-  return (x, z) => {
-    const hills = (fbm(x * 0.24 + ox, z * 0.24 + oz) - 0.48) * 3.4
-    // vale sinuoso (rio) cortando o planalto
-    const d = z - 3.4 - Math.sin(x * 0.45 + phase) * 1.3
-    const valley = Math.exp(-(d * d) / 1.6) * 1.25
-    return hills - valley
-  }
-}
 
-// Perímetro do imóvel (coordenadas locais x,z)
-const PARCEL = [
-  [-1.7, -1.0],
-  [0.1, -1.7],
-  [1.8, -0.8],
-  [2.0, 0.8],
-  [0.4, 1.5],
-  [-1.5, 0.9],
-]
-const PARCEL_CENTER = [0.18, -0.05]
+  // distância ao eixo do rio que corta o vale
+  const riverDist = (x, z) => Math.abs(z - 3.4 - Math.sin(x * 0.45 + phase) * 1.3)
+  const base = (x, z) => {
+    const hills = (fbm(x * 0.24 + ox, z * 0.24 + oz) - 0.48) * 2.9
+    const d = riverDist(x, z)
+    return hills - Math.exp(-(d * d) / 1.6) * 1.2
+  }
+  // açude e pátio da sede ficam em terreno aplainado
+  const flats = [
+    { ...POND, r: POND.r + 0.22, h: base(POND.x, POND.z) - 0.05 },
+    { ...YARD, r: YARD.r + 0.2, h: base(YARD.x, YARD.z) },
+  ]
+  const heightAt = (x, z) => {
+    let h = base(x, z)
+    for (const f of flats) {
+      const w = 1 - smooth(f.r * 0.55, f.r, Math.hypot(x - f.x, z - f.z))
+      h += (f.h - h) * w
+    }
+    return h
+  }
+  const upAt = (x, z) => {
+    const e = 0.06
+    const gx = (heightAt(x + e, z) - heightAt(x - e, z)) / (2 * e)
+    const gz = (heightAt(x, z + e) - heightAt(x, z - e)) / (2 * e)
+    return 1 / Math.sqrt(1 + gx * gx + gz * gz)
+  }
+
+  // talhões: sementes espalhadas com distância mínima entre si
+  const cells = []
+  for (let i = 0; cells.length < NC && i < 600; i++) {
+    const a = hash(i + seed * 3.1, 1.7) * Math.PI * 2
+    const r = Math.sqrt(hash(i * 1.3 + 5, seed + 2.9)) * 6.4
+    const x = Math.cos(a) * r
+    const z = Math.sin(a) * r
+    if (cells.some((c) => Math.hypot(c.x - x, c.z - z) < 1.55)) continue
+    cells.push({
+      x,
+      z,
+      use: USES[Math.floor(hash(i + 9.1, seed * 2.3 + 4) * USES.length)],
+      angle: hash(i * 2.7, seed + 8.8) * Math.PI,
+    })
+  }
+  while (cells.length < NC) cells.push({ x: 99, z: 99, use: PASTO, angle: 0 })
+
+  const cellAt = (x, z) => {
+    let d1 = Infinity
+    let d2 = Infinity
+    let cell = cells[0]
+    for (const c of cells) {
+      const d = Math.hypot(c.x - x, c.z - z)
+      if (d < d1) {
+        d2 = d1
+        d1 = d
+        cell = c
+      } else if (d < d2) d2 = d
+    }
+    return { cell, edge: d2 - d1 }
+  }
+  // o açude fica em pasto
+  cellAt(POND.x, POND.z).cell.use = PASTO
+
+  return { heightAt, upAt, riverDist, cells, cellAt, phase }
+}
 
 const vertexShader = /* glsl */ `
   varying vec3 vPos;
@@ -98,18 +206,25 @@ const vertexShader = /* glsl */ `
 `
 
 const fragmentShader = /* glsl */ `
-  uniform vec3 uInk;
+  #define NC ${NC}
+  uniform vec3 uBg;
   uniform vec3 uLine;
-  uniform vec3 uAccent;
+  uniform vec3 uSun;
   uniform float uInterval;
   uniform float uRadius;
   uniform float uReveal;
-  uniform float uScan;
-  uniform float uScanMax;
   uniform float uParcel;
-  uniform vec2 uScanC;
+  uniform float uFocus;
+  uniform float uPhase;
   uniform vec2 uPoly[6];
+  uniform vec4 uCells[NC];
+  uniform vec3 uPond;
+  uniform vec3 uYard;
+  uniform vec2 uRoad[4];
   varying vec3 vPos;
+
+  // cores escritas em sRGB, convertidas para o espaço linear do cálculo
+  vec3 c(float r, float g, float b) { return pow(vec3(r, g, b), vec3(2.2)); }
 
   float contour(float h, float w) {
     float f = fract(h);
@@ -130,81 +245,111 @@ const fragmentShader = /* glsl */ `
     return inside;
   }
 
+  float sdSeg(vec2 p, vec2 a, vec2 b) {
+    vec2 pa = p - a;
+    vec2 ba = b - a;
+    float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
+    return length(pa - ba * h);
+  }
+
+  vec3 fieldColor(float use, float stripe) {
+    if (use < 0.5) return c(0.44, 0.56, 0.31);                                   // pasto
+    if (use < 1.5) return mix(c(0.33, 0.46, 0.22), c(0.49, 0.63, 0.32), stripe); // lavoura
+    if (use < 2.5) return mix(c(0.37, 0.27, 0.18), c(0.53, 0.41, 0.28), stripe); // solo preparado
+    if (use < 3.5) return mix(c(0.63, 0.52, 0.27), c(0.78, 0.67, 0.38), stripe); // trigo
+    if (use < 4.5) return mix(c(0.25, 0.21, 0.15), c(0.34, 0.49, 0.25), stripe); // parreiral
+    return c(0.17, 0.28, 0.17);                                                  // mata
+  }
+
   void main() {
-    float r = length(vPos.xz);
-    float fade = 1.0 - smoothstep(uRadius * 0.42, uRadius * 0.98, r);
-    float front = uReveal * uRadius * 1.15;
-    fade *= smoothstep(0.0, 0.7, front - r);
+    vec2 p = vPos.xz;
+    float r = length(p);
+    float fade = 1.0 - smoothstep(uRadius * 0.5, uRadius * 0.98, r);
+    fade *= smoothstep(0.0, 0.9, uReveal * uRadius * 1.15 - r);
     if (fade < 0.004) discard;
 
+    // talhão mais próximo e distância até a divisa entre talhões
+    float d1 = 1e9;
+    float d2 = 1e9;
+    vec4 cell = uCells[0];
+    for (int i = 0; i < NC; i++) {
+      float d = distance(p, uCells[i].xy);
+      if (d < d1) { d2 = d1; d1 = d; cell = uCells[i]; }
+      else if (d < d2) { d2 = d; }
+    }
+    float hedge = 1.0 - smoothstep(0.03, 0.075, d2 - d1);
+
+    // linhas de plantio
+    float freq = (cell.z > 3.5 && cell.z < 4.5) ? 86.0 : 58.0;
+    float ph = dot(p, vec2(cos(cell.w), sin(cell.w))) * freq;
+    float stripe = smoothstep(-0.35, 0.35, sin(ph));
+    stripe = mix(stripe, 0.5, smoothstep(0.9, 2.4, fwidth(ph)));
+    vec3 col = fieldColor(cell.z, stripe);
+
+    vec3 n = normalize(cross(dFdx(vPos), dFdy(vPos)));
+    if (n.y < 0.0) n = -n;
+    vec3 mata = c(0.17, 0.28, 0.17);
+
+    // encostas íngremes e margens do rio ficam com mata nativa
+    col = mix(col, mata, smoothstep(0.82, 0.70, n.y));
+    col = mix(col, c(0.14, 0.22, 0.14), hedge * 0.85);
+    float rd = abs(p.y - 3.4 - sin(p.x * 0.45 + uPhase) * 1.3);
+    col = mix(col, mata, 1.0 - smoothstep(0.45, 0.85, rd));
+
+    // pátio da sede e estrada de acesso
+    float yard = 1.0 - smoothstep(uYard.z * 0.7, uYard.z, distance(p, uYard.xy));
+    float rdist = min(sdSeg(p, uRoad[0], uRoad[1]), min(sdSeg(p, uRoad[1], uRoad[2]), sdSeg(p, uRoad[2], uRoad[3])));
+    float road = 1.0 - smoothstep(0.03, 0.055, rdist);
+    col = mix(col, c(0.60, 0.51, 0.37), max(yard * 0.92, road));
+
+    // rio e açude
+    float water = 1.0 - smoothstep(0.19, 0.25, rd);
+    float pd = length((p - uPond.xy) / vec2(1.0, 0.74));
+    water = max(water, 1.0 - smoothstep(uPond.z - 0.035, uPond.z, pd));
+    col = mix(col, c(0.20, 0.36, 0.42), water);
+
+    // sol baixo de fim de tarde
+    float diff = max(dot(n, uSun), 0.0);
+    col *= 0.42 + 0.8 * diff;
+
+    // curvas de nível discretas, como na planta
     float h = vPos.y / uInterval;
     float crowd = 1.0 - smoothstep(0.3, 0.7, fwidth(h));
-    float minor = contour(h, 0.7) * crowd;
-    float major = contour(h / 5.0, 1.0);
+    float lines = max(contour(h, 0.7) * crowd * 0.09, contour(h / 5.0, 1.0) * 0.16) * (1.0 - water);
+    col = mix(col, uLine, lines);
 
-    float sd = length(vPos.xz - uScanC);
-    float scan = exp(-pow((sd - uScan) / 0.32, 2.0)) * (1.0 - uScan / uScanMax);
-    // frente de revelação brilha de leve, como uma varredura inicial
-    float edge = exp(-pow((front - r - 0.35) / 0.3, 2.0)) * (1.0 - uReveal);
+    // o imóvel fica iluminado; o entorno recua para o fundo
+    float lit = mix(1.0, insideParcel(p) * uParcel, uFocus);
+    vec3 dim = mix(col, vec3(dot(col, vec3(0.3, 0.59, 0.11))), 0.35);
+    dim = mix(dim, uBg, mix(0.56, 0.62, uFocus));
+    col = mix(dim, col, lit);
 
-    float hn = clamp(vPos.y * 0.25 + 0.5, 0.0, 1.0);
-    vec3 col = uInk * (0.7 + hn * 0.8);
-
-    float inside = insideParcel(vPos.xz) * uParcel;
-    col = mix(col, uAccent, inside * 0.13);
-
-    col = mix(col, uLine, minor * (0.15 + scan * 0.55 + edge * 0.5 + inside * 0.12));
-    col = mix(col, uAccent, major * 0.72);
-    col += uAccent * (scan * 0.09 + edge * 0.12);
-
-    gl_FragColor = vec4(col, fade * 0.94);
-    #include <colorspace_fragment>
-  }
-`
-
-/* Nuvem de pontos — o mesmo relevo visto como varredura de drone/LiDAR */
-const pointsVertex = /* glsl */ `
-  uniform float uSize;
-  uniform float uRadius;
-  uniform float uReveal;
-  uniform float uSweep;
-  attribute float aRand;
-  varying float vAlpha;
-  varying float vH;
-  varying float vSweep;
-  void main() {
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_Position = projectionMatrix * mv;
-    float r = length(position.xz);
-    float fade = 1.0 - smoothstep(uRadius * 0.42, uRadius * 0.98, r);
-    fade *= smoothstep(0.0, 0.7, uReveal * uRadius * 1.15 - r);
-    float sw = exp(-pow((position.x - uSweep) / 0.26, 2.0));
-    vH = clamp(position.y * 0.25 + 0.5, 0.0, 1.0);
-    vSweep = sw;
-    vAlpha = fade * (0.2 + 0.5 * aRand * vH + sw * 0.9);
-    gl_PointSize = uSize * (1.0 + sw * 1.3) * (0.6 + aRand * 0.8) / -mv.z;
-  }
-`
-const pointsFragment = /* glsl */ `
-  uniform vec3 uLine;
-  uniform vec3 uAccent;
-  varying float vAlpha;
-  varying float vH;
-  varying float vSweep;
-  void main() {
-    float d = length(gl_PointCoord - 0.5);
-    float disc = 1.0 - smoothstep(0.32, 0.5, d);
-    if (disc * vAlpha < 0.01) discard;
-    vec3 col = mix(uAccent, uLine, vH * vH * 0.8);
-    col = mix(col, uLine, vSweep * 0.7);
-    gl_FragColor = vec4(col, disc * vAlpha);
+    gl_FragColor = vec4(col, fade);
     #include <colorspace_fragment>
   }
 `
 
 const easeOut = (t) => 1 - Math.pow(1 - Math.min(Math.max(t, 0), 1), 3)
 
-function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
+// junta partes coloridas numa geometria só (cor por vértice)
+function colored(geo, hex) {
+  const g = geo.index ? geo.toNonIndexed() : geo
+  const col = new Color(hex)
+  const n = g.attributes.position.count
+  const arr = new Float32Array(n * 3)
+  for (let i = 0; i < n; i++) arr.set([col.r, col.g, col.b], i * 3)
+  g.setAttribute('color', new BufferAttribute(arr, 3))
+  g.deleteAttribute('uv')
+  return g
+}
+function roof(w, h, d, hex) {
+  const g = new ConeGeometry(Math.SQRT1_2, h, 4)
+  g.rotateY(Math.PI / 4)
+  g.scale(w, 1, d)
+  return colored(g, hex)
+}
+
+function TerrainScene({ seed = 0, focus = true, onReady, onElevation }) {
   const hostRef = useRef(null)
   const cbRef = useRef({ onReady, onElevation })
 
@@ -220,7 +365,7 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     try {
       renderer = new WebGLRenderer({ antialias: true, alpha: true })
     } catch {
-      return // sem WebGL: o hero segue com a foto de fundo
+      return // sem WebGL: a seção segue com o fundo original
     }
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -233,12 +378,12 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     const css = getComputedStyle(host)
     const cssColor = (name, fallback) =>
       new Color(css.getPropertyValue(name).trim() || fallback)
-    const ink = cssColor('--ink', '#141414')
+    const bg = cssColor('--terrain-bg', css.getPropertyValue('--ink').trim() || '#141414')
     const paper = cssColor('--paper', '#f5f5f0')
     const accent = cssColor('--terracotta', '#5E9A6B')
 
-    const heightAt = makeHeight(seed)
-    const isPoints = mode === 'points'
+    const land = makeLand(seed)
+    const { heightAt } = land
     const disposables = []
 
     const scene = new Scene()
@@ -246,100 +391,169 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     const world = new Group()
     scene.add(world)
 
+    // luz presa ao terreno, para acompanhar o giro da maquete
+    const sun = new DirectionalLight(0xfff0d8, 2.5)
+    sun.position.copy(SUN).multiplyScalar(10)
+    world.add(sun, sun.target)
+    world.add(new HemisphereLight(0xdfe8f0, 0x3a3326, 1.35))
+
+    /* ---------- terreno ---------- */
     const uniforms = {
-      uSize: { value: 30 },
-      uSweep: { value: -RADIUS * 2 },
-      uInk: { value: ink },
+      uBg: { value: bg },
       uLine: { value: paper },
-      uAccent: { value: accent },
+      uSun: { value: SUN },
       uInterval: { value: INTERVAL },
       uRadius: { value: RADIUS },
       uReveal: { value: 0 },
-      uScan: { value: 0 },
-      uScanMax: { value: RADIUS },
       uParcel: { value: 0 },
-      uScanC: { value: new Vector2(PARCEL_CENTER[0], PARCEL_CENTER[1]) },
+      uFocus: { value: focus ? 1 : 0 },
+      uPhase: { value: land.phase },
       uPoly: { value: PARCEL.map(([x, z]) => new Vector2(x, z)) },
+      uCells: { value: land.cells.map((c) => new Vector4(c.x, c.z, c.use, c.angle)) },
+      uPond: { value: new Vector3(POND.x, POND.z, POND.r) },
+      // sem a sede (paisagem do CTA) o pátio sai de cena
+      uYard: { value: new Vector3(focus ? YARD.x : 99, YARD.z, YARD.r) },
+      uRoad: { value: ROAD.map(([x, z]) => new Vector2(x, z)) },
     }
-
-    if (isPoints) {
-      /* ---------- nuvem de pontos ---------- */
-      const n = small ? 190 : 300
-      const pts = new Float32Array(n * n * 3)
-      const rnd = new Float32Array(n * n)
-      const step = SIZE / n
-      let k = 0
-      for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-          const x = -RADIUS + (i + hash(i, j)) * step
-          const z = -RADIUS + (j + hash(j + 31, i + 17)) * step
-          if (Math.hypot(x, z) > RADIUS) continue
-          pts.set([x, heightAt(x, z), z], k * 3)
-          rnd[k] = hash(i * 1.7 + 3, j * 2.3 + 9)
-          k++
-        }
-      }
-      const geo = new BufferGeometry()
-      geo.setAttribute('position', new BufferAttribute(pts.slice(0, k * 3), 3))
-      geo.setAttribute('aRand', new BufferAttribute(rnd.slice(0, k), 1))
-      const mat = new ShaderMaterial({
-        uniforms,
-        vertexShader: pointsVertex,
-        fragmentShader: pointsFragment,
-        transparent: true,
-        depthWrite: false,
-        blending: AdditiveBlending,
-      })
-      world.add(new Points(geo, mat))
-      disposables.push(geo, mat)
-    } else {
-      /* ---------- malha do terreno ---------- */
-      const seg = small ? 120 : 200
+    {
+      const seg = small ? 130 : 220
       const geo = new PlaneGeometry(SIZE, SIZE, seg, seg)
       geo.rotateX(-Math.PI / 2)
       const pos = geo.attributes.position
       for (let i = 0; i < pos.count; i++) {
         pos.setY(i, heightAt(pos.getX(i), pos.getZ(i)))
       }
-      const mat = new ShaderMaterial({
-        uniforms,
-        vertexShader,
-        fragmentShader,
-        transparent: true,
-      })
+      const mat = new ShaderMaterial({ uniforms, vertexShader, fragmentShader, transparent: true })
       world.add(new Mesh(geo, mat))
       disposables.push(geo, mat)
     }
 
-    /* ---------- perímetro do imóvel, assentado no relevo ---------- */
-    const LIFT = 0.035
+    /* ---------- árvores, cerca e sede ---------- */
+    const propMat = new MeshLambertMaterial({ vertexColors: true, flatShading: true })
+    disposables.push(propMat)
+
+    // araucária: tronco fino e copas em taça
+    const araucariaGeo = mergeGeometries([
+      colored(new CylinderGeometry(0.011, 0.018, 0.24, 5).translate(0, 0.12, 0), '#4d3d2c'),
+      colored(new ConeGeometry(0.115, 0.06, 7).rotateX(Math.PI).translate(0, 0.235, 0), '#2e5a35'),
+      colored(new ConeGeometry(0.075, 0.045, 7).rotateX(Math.PI).translate(0, 0.285, 0), '#3d7042'),
+    ])
+    // árvore de copa redonda (mata nativa)
+    const roundGeo = mergeGeometries([
+      colored(new CylinderGeometry(0.012, 0.016, 0.1, 5).translate(0, 0.05, 0), '#4d3d2c'),
+      colored(new IcosahedronGeometry(0.075, 0).translate(0, 0.14, 0), '#3b6a3a'),
+    ])
+    const postGeo = colored(new BoxGeometry(0.014, 0.075, 0.014).translate(0, 0.0375, 0), '#7a664d')
+    disposables.push(araucariaGeo, roundGeo, postGeo)
+
+    const trees = [[], []]
+    const maxTrees = small ? 420 : 900
+    for (let i = 0; trees[0].length + trees[1].length < maxTrees && i < 14000; i++) {
+      const a = hash(i * 1.1 + seed, 3.3) * Math.PI * 2
+      const r = Math.sqrt(hash(i * 0.7 + 2, seed + 6.1)) * RADIUS * 0.5
+      const x = Math.cos(a) * r
+      const z = Math.sin(a) * r
+      const rd = land.riverDist(x, z)
+      if (rd < 0.3) continue
+      if (Math.hypot(x - POND.x, (z - POND.z) / 0.74) < POND.r + 0.07) continue
+      if (Math.hypot(x - YARD.x, z - YARD.z) < YARD.r + 0.2) continue
+      if (distToRoad(x, z) < 0.1) continue
+      const { cell, edge } = land.cellAt(x, z)
+      const roll = hash(i * 3.7, seed + 1.9)
+      const keep =
+        (cell.use === MATA && roll < 0.85) ||
+        (land.upAt(x, z) < 0.74 && roll < 0.75) ||
+        (rd < 0.85 && roll < 0.8) ||
+        (edge < 0.07 && roll < 0.32)
+      if (!keep) continue
+      const kind = hash(i * 5.3, seed + 7.7) < 0.55 ? 0 : 1
+      trees[kind].push({
+        x,
+        z,
+        y: heightAt(x, z) - 0.01,
+        s: 0.5 + hash(i * 2.9, 4.4) * 0.4,
+        rot: hash(i, 9.9) * 6.28,
+        lit: !focus || inParcel(x, z),
+      })
+    }
+
+    const posts = []
     const linePts = []
-    const STEPS = 28
+    const LIFT = 0.03
     for (let i = 0; i < PARCEL.length; i++) {
       const [ax, az] = PARCEL[i]
       const [bx, bz] = PARCEL[(i + 1) % PARCEL.length]
-      for (let s = 0; s < STEPS; s++) {
-        const t = s / STEPS
+      const len = Math.hypot(bx - ax, bz - az)
+      const steps = Math.round(len / 0.07)
+      const every = Math.max(1, Math.round(steps / Math.round(len / 0.17)))
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps
         const x = ax + (bx - ax) * t
         const z = az + (bz - az) * t
-        linePts.push(x, heightAt(x, z) + LIFT, z)
+        const y = heightAt(x, z)
+        linePts.push(x, y + LIFT, z)
+        if (s % every === 0 && s > 0) posts.push({ x, y, z, s: 1, rot: 0, lit: true })
       }
     }
     linePts.push(linePts[0], linePts[1], linePts[2])
+
+    const dummy = new Object3D()
+    const tint = new Color()
+    const origin = new Vector2(0.2, 0)
+    const makeInstanced = (geo, items) => {
+      const mesh = new InstancedMesh(geo, propMat, Math.max(items.length, 1))
+      mesh.count = items.length
+      items.forEach((it, i) => {
+        tint.setScalar(it.lit ? 1 : 0.34)
+        mesh.setColorAt(i, tint)
+      })
+      world.add(mesh)
+      return { mesh, items }
+    }
+    const instanced = [makeInstanced(araucariaGeo, trees[0]), makeInstanced(roundGeo, trees[1])]
+    if (focus) instanced.push(makeInstanced(postGeo, posts))
+
+    // crescem do chão, em onda a partir do centro do imóvel
+    const setGrow = (g) => {
+      for (const { mesh, items } of instanced) {
+        items.forEach((it, i) => {
+          const dist = Math.hypot(it.x - origin.x, it.z - origin.y)
+          const s = Math.max(it.s * easeOut(g * 2.2 - dist * 0.3), 0.0001)
+          dummy.position.set(it.x, it.y, it.z)
+          dummy.rotation.set(0, it.rot, 0)
+          dummy.scale.setScalar(s)
+          dummy.updateMatrix()
+          mesh.setMatrixAt(i, dummy.matrix)
+        })
+        mesh.instanceMatrix.needsUpdate = true
+      }
+    }
+
+    // sede: casa, galpão e silo
+    const farmGeo = mergeGeometries([
+      colored(new BoxGeometry(0.2, 0.1, 0.14).translate(0, 0.05, 0), '#e9e3d2'),
+      roof(0.25, 0.07, 0.18, '#8f4d34').translate(0, 0.135, 0),
+      colored(new BoxGeometry(0.3, 0.12, 0.17).translate(0.02, 0.06, -0.3), '#b7ad9b'),
+      roof(0.35, 0.065, 0.21, '#6c6a63').translate(0.02, 0.152, -0.3),
+      colored(new CylinderGeometry(0.045, 0.045, 0.2, 10).translate(-0.24, 0.1, -0.24), '#cfcfc8'),
+      colored(new ConeGeometry(0.052, 0.045, 10).translate(-0.24, 0.222, -0.24), '#8e8e88'),
+    ])
+    const farm = new Mesh(farmGeo, propMat)
+    farm.position.set(YARD.x, heightAt(YARD.x, YARD.z), YARD.z + 0.12)
+    farm.rotation.y = 0.5
+    farm.visible = focus
+    world.add(farm)
+    disposables.push(farmGeo)
+
+    /* ---------- divisa do imóvel e marcos ---------- */
     const lineGeo = new LineGeometry()
     lineGeo.setPositions(linePts)
     const totalSegments = linePts.length / 3 - 1
-    const lineMat = new LineMaterial({
-      color: accent,
-      linewidth: small ? 2 : 2.4,
-      transparent: true,
-    })
+    const lineMat = new LineMaterial({ color: accent, linewidth: small ? 2 : 2.6, transparent: true })
     const boundary = new Line2(lineGeo, lineMat)
     lineGeo.instanceCount = 0
-    if (!isPoints) world.add(boundary)
 
-    /* ---------- marcos (vértices) ---------- */
-    const STAKE = 0.42
+    const STAKE = 0.4
     const markerPos = new Float32Array(PARCEL.length * 3)
     const stakePos = new Float32Array(PARCEL.length * 6)
     PARCEL.forEach(([x, z], i) => {
@@ -356,19 +570,19 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
       transparent: true,
       opacity: 0,
     })
-    const markers = new Points(markerGeo, markerMat)
     const stakeGeo = new BufferGeometry()
     stakeGeo.setAttribute('position', new BufferAttribute(stakePos, 3))
     const stakeMat = new LineBasicMaterial({ color: paper, transparent: true, opacity: 0 })
-    const stakes = new LineSegments(stakeGeo, stakeMat)
-    if (!isPoints) world.add(markers, stakes)
+    if (focus) {
+      world.add(boundary, new Points(markerGeo, markerMat), new LineSegments(stakeGeo, stakeMat))
+    }
 
     /* ---------- ponto de leitura que segue o cursor ---------- */
     const probe = new Group()
-    const ringGeo = new RingGeometry(0.13, 0.155, 40)
+    const ringGeo = new RingGeometry(0.11, 0.135, 40)
     ringGeo.rotateX(-Math.PI / 2)
     const ringMat = new MeshBasicMaterial({
-      color: accent,
+      color: paper,
       transparent: true,
       opacity: 0.95,
       side: DoubleSide,
@@ -378,11 +592,10 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     const plumbGeo = new BufferGeometry()
     plumbGeo.setAttribute(
       'position',
-      new BufferAttribute(new Float32Array([0, 0, 0, 0, 0.7, 0]), 3)
+      new BufferAttribute(new Float32Array([0, 0, 0, 0, 0.6, 0]), 3)
     )
-    const plumbMat = new LineBasicMaterial({ color: accent, transparent: true, depthTest: false })
-    const plumb = new LineSegments(plumbGeo, plumbMat)
-    probe.add(ring, plumb)
+    const plumbMat = new LineBasicMaterial({ color: paper, transparent: true, depthTest: false })
+    probe.add(ring, new LineSegments(plumbGeo, plumbMat))
     probe.visible = false
     world.add(probe)
 
@@ -394,6 +607,7 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     const d = new Vector3()
     let probeHit = false
     let lastAlt = null
+    let lastGrow = -1
     let width = 1
     let height = 1
     let wide = true
@@ -409,14 +623,13 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
       wide = width / height > 1.15
       renderer.setSize(width, height, false)
       lineMat.resolution.set(width, height)
-      uniforms.uSize.value = 26 * dpr * Math.max(0.75, Math.min(1.4, height / 800))
       camera.aspect = width / height
       camera.updateProjectionMatrix()
-      // no desktop o relevo fica à direita, liberando o título à esquerda
-      world.position.set(wide ? 3.3 : 0, wide ? -0.5 : 1.9, 0)
+      // no desktop a maquete fica à direita, liberando o título à esquerda
+      world.position.set(wide ? 2.7 : 0, wide ? -0.35 : 1.7, 0)
     }
 
-    // interseção raio × relevo por marcha + bisseção (sem BVH, sem custo)
+    // interseção raio × relevo por marcha + bisseção
     const castProbe = () => {
       raycaster.setFromCamera(pointer.ndc, camera)
       world.updateMatrixWorld()
@@ -424,11 +637,8 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
       o.copy(raycaster.ray.origin).applyMatrix4(inv)
       d.copy(raycaster.ray.direction).transformDirection(inv)
       let prev = 0
-      for (let t = 2; t < 32; t += 0.25) {
-        const x = o.x + d.x * t
-        const y = o.y + d.y * t
-        const z = o.z + d.z * t
-        if (y < heightAt(x, z)) {
+      for (let t = 2; t < 30; t += 0.25) {
+        if (o.y + d.y * t < heightAt(o.x + d.x * t, o.z + d.z * t)) {
           let a = prev
           let b = t
           for (let k = 0; k < 10; k++) {
@@ -438,7 +648,7 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
           }
           const hx = o.x + d.x * b
           const hz = o.z + d.z * b
-          if (Math.hypot(hx, hz) > RADIUS * 0.72) return false
+          if (Math.hypot(hx, hz) > RADIUS * 0.6) return false
           probeTarget.set(hx, heightAt(hx, hz) + 0.02, hz)
           return true
         }
@@ -450,40 +660,34 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
     const frame = (now) => {
       const t = reduced ? 99 : (now - start) / 1000
 
-      uniforms.uReveal.value = easeOut(t / 2.6)
-      const parcelP = easeOut((t - 1.7) / 1.9)
-      lineGeo.instanceCount = Math.round(totalSegments * parcelP)
-      uniforms.uParcel.value = easeOut((t - 3.1) / 1.2)
-      const stakeP = easeOut((t - 3.0) / 0.9)
+      uniforms.uReveal.value = easeOut(t / 2.4)
+      lineGeo.instanceCount = Math.round(totalSegments * easeOut((t - 1.5) / 1.8))
+      uniforms.uParcel.value = easeOut((t - 2.3) / 1.4)
+      const stakeP = easeOut((t - 2.9) / 0.9)
       markerMat.opacity = stakeP
       stakeMat.opacity = stakeP * 0.55
-      stakes.scale.y = 1
-      const scanT = t - 4.2
-      uniforms.uScan.value = scanT > 0 && !reduced ? ((scanT % 7) / 4.5) * RADIUS : RADIUS
-      if (uniforms.uScan.value > RADIUS) uniforms.uScan.value = RADIUS
-      // feixe de varredura da nuvem de pontos
-      const sweepT = t - 2.4
-      uniforms.uSweep.value =
-        sweepT > 0 && !reduced ? -RADIUS + ((sweepT % 7.5) / 5) * SIZE : -RADIUS * 2
+
+      const grow = Math.min(Math.max((t - 1.6) / 2.4, 0), 1)
+      if (grow !== lastGrow) {
+        lastGrow = grow
+        setGrow(grow)
+        farm.scale.setScalar(Math.max(1.3 * easeOut(grow * 2.2), 0.0001))
+      }
 
       pointer.x += (pointer.tx - pointer.x) * 0.045
       pointer.y += (pointer.ty - pointer.y) * 0.045
 
-      world.rotation.y = (reduced ? 0.5 : 0.5 + t * 0.022) + pointer.x * 0.12
-      const dist = wide ? 11.2 : 15.5
+      world.rotation.y = (reduced ? 0.45 : 0.45 + t * 0.018) + pointer.x * 0.12
+      const dist = wide ? 10.2 : 14.5
       camera.position.set(
-        pointer.x * 0.5,
-        5.4 + scrollP * 2.6 - pointer.y * 0.35,
-        dist - scrollP * 1.4
+        pointer.x * 0.45,
+        4.9 + scrollP * 2.2 - pointer.y * 0.3,
+        dist - scrollP * 1.2
       )
-      camera.lookAt(0, 0.1 + scrollP * 0.6, 0)
+      camera.lookAt(0, 0.1 + scrollP * 0.5, 0)
       camera.updateMatrixWorld()
 
-      if (pointer.active && !reduced && !isPoints) {
-        probeHit = castProbe()
-      } else {
-        probeHit = false
-      }
+      probeHit = pointer.active && !reduced && focus ? castProbe() : false
       if (probeHit) {
         if (!probe.visible) probe.position.copy(probeTarget)
         probe.visible = true
@@ -491,8 +695,7 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
         probe.position.y = heightAt(probe.position.x, probe.position.z) + 0.02
         const pulse = 1 + Math.sin(now / 320) * 0.08
         ring.scale.set(pulse, 1, pulse)
-        const alt = BASE_ALT + probe.position.y * M_PER_UNIT
-        const rounded = Math.round(alt * 10) / 10
+        const rounded = Math.round((BASE_ALT + probe.position.y * M_PER_UNIT) * 10) / 10
         if (rounded !== lastAlt) {
           lastAlt = rounded
           cbRef.current.onElevation?.(rounded)
@@ -569,12 +772,24 @@ function TerrainScene({ mode = 'contours', seed = 0, onReady, onElevation }) {
       document.documentElement.removeEventListener('pointerleave', onLeave)
       window.removeEventListener('scroll', onScroll)
       document.removeEventListener('visibilitychange', onVisibility)
-      ;[...disposables, lineGeo, markerGeo, stakeGeo, ringGeo, plumbGeo].forEach((g) => g.dispose())
-      ;[lineMat, markerMat, stakeMat, ringMat, plumbMat].forEach((m) => m.dispose())
+      instanced.forEach(({ mesh }) => mesh.dispose())
+      ;[
+        ...disposables,
+        lineGeo,
+        lineMat,
+        markerGeo,
+        markerMat,
+        stakeGeo,
+        stakeMat,
+        ringGeo,
+        ringMat,
+        plumbGeo,
+        plumbMat,
+      ].forEach((x) => x.dispose())
       renderer.dispose()
       renderer.domElement.remove()
     }
-  }, [mode, seed])
+  }, [seed, focus])
 
   return <div className="terrain-3d-canvas" ref={hostRef} />
 }
