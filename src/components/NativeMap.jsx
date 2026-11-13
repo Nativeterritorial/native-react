@@ -22,27 +22,14 @@ function NativeMap() {
     })
     mapRef.current = map
 
-    // Tiles dark (CartoDB Dark Matter — free, sem API key)
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-      {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19,
-      },
-    ).addTo(map)
-
-    // Labels (cidades / ruas) em layer separado, mais sutil
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
-      {
-        attribution: '',
-        subdomains: 'abcd',
-        maxZoom: 19,
-        opacity: 0.6,
-      },
-    ).addTo(map)
+    // Tiles do OpenStreetMap (sem API key). O visual escuro vem de um filtro
+    // CSS em .leaflet-tile-pane — o CARTO passou a exigir chave e devolvia
+    // tiles com marca d'água "API KEY REQUIRED".
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(map)
 
     // Pin estilo Google em SVG, com halo dourado pulsando
     const pulseIcon = L.divIcon({

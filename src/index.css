@@ -1352,7 +1352,7 @@ section { position: relative; }
 }
 
 /* ====================================================================
-   MAPA DARK + PIN PULSANTE DOURADO (Leaflet + CartoDB Dark)
+   MAPA DARK + PIN PULSANTE DOURADO (Leaflet + OpenStreetMap)
    ==================================================================== */
 .native-map-canvas {
   width: 100%;
@@ -1362,6 +1362,10 @@ section { position: relative; }
 .native-map-canvas .leaflet-container {
   background: #0a0a0a;
   font-family: var(--sans);
+}
+/* Tema escuro aplicado sobre os tiles claros do OpenStreetMap */
+.native-map-canvas .leaflet-tile-pane {
+  filter: grayscale(1) invert(1) brightness(0.78) contrast(1.15);
 }
 /* Controles de zoom em estilo dark */
 .native-map-canvas .leaflet-control-zoom a {

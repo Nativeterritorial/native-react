@@ -30,9 +30,9 @@ function AreaSection() {
             </h2>
             <p className="section-sub fade-in" style={{ marginBottom: '40px' }}>
               A NATIVE tem base em{' '}
-              <strong style={{ color: 'var(--ink)' }}>Veranópolis-RS</strong> e atende
+              <strong style={{ color: 'var(--paper)' }}>Veranópolis-RS</strong> e atende
               demandas em toda a Serra Gaúcha e no{' '}
-              <strong style={{ color: 'var(--ink)' }}>Rio Grande do Sul</strong>.
+              <strong style={{ color: 'var(--paper)' }}>Rio Grande do Sul</strong>.
             </p>
 
             <div className="area-tags">
