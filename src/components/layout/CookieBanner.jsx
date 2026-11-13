@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { setConsent } from '../../lib/analytics'
 
 // useEffect roda código depois que o componente aparece na tela.
 // Aqui usamos para checar se o usuário já respondeu ao banner.
@@ -15,11 +16,13 @@ function CookieBanner() {
 
   const aceitar = () => {
     localStorage.setItem('native_cookie_consent', 'accepted')
+    setConsent(true)
     setVisible(false)
   }
 
   const recusar = () => {
     localStorage.setItem('native_cookie_consent', 'declined')
+    setConsent(false)
     setVisible(false)
   }
 

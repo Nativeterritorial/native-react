@@ -1,28 +1,14 @@
 const WA_URL = 'https://wa.me/5554997104400?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.'
 
 function WhatsAppFloat() {
-  const handleClick = () => {
-    if (window.gtag) {
-      // Conversão do Google Ads
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-18051450854/XfrNCOb3kaIcEOaPzZ9D',
-        'value': 1.0,
-        'currency': 'BRL'
-      })
-      // Evento do Google Analytics (relatório mensal: contatos gerados)
-      window.gtag('event', 'whatsapp_click', {
-        page_path: window.location.pathname
-      })
-    }
-  }
-
+  // O clique é medido pelo listener global em src/lib/analytics.js
   return (
     <a
       href={WA_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
-      onClick={handleClick}
+      data-wa-location="flutuante"
       style={{
         position: 'fixed',
         right: '20px',

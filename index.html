@@ -69,23 +69,33 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+
+      // Consentimento (Consent Mode v2): tudo negado até o visitante aceitar
+      // no banner de cookies. A escolha fica em localStorage e o banner
+      // atualiza o estado via src/lib/analytics.js.
+      var nativeConsentGranted = false;
+      try {
+        nativeConsentGranted = localStorage.getItem('native_cookie_consent') === 'accepted';
+      } catch (e) {}
+      var nativeConsentState = nativeConsentGranted ? 'granted' : 'denied';
+      gtag('consent', 'default', {
+        ad_storage: nativeConsentState,
+        ad_user_data: nativeConsentState,
+        ad_personalization: nativeConsentState,
+        analytics_storage: nativeConsentState
+      });
+
       gtag('js', new Date());
       gtag('config', 'AW-18051450854');
       gtag('config', 'G-MQP9GTQGPH', { anonymize_ip: true });
     </script>
-
-    <!-- Event snippet for Contato conversion page -->
-    <script>
-      gtag('event', 'conversion', {
-        'send_to': 'AW-18051450854/XfrNCOb3kaIcEOaPzZ9D',
-        'value': 1.0,
-        'currency': 'BRL'
-      });
-    </script>
+    <!-- A conversão "Contato" do Google Ads NÃO dispara no carregamento:
+         ela é enviada só no clique em um link de WhatsApp (src/lib/analytics.js) -->
 
     <!-- Meta Pixel -->
     <script>
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('consent', nativeConsentGranted ? 'grant' : 'revoke');
       fbq('init', '1481999170005922');
       fbq('track', 'PageView');
     </script>
@@ -95,8 +105,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- Meta Pixel noscript — precisa ficar no body, não no head -->
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1481999170005922&ev=PageView&noscript=1" /></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
