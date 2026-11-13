@@ -4,12 +4,14 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 // da tela e o navegador está ocioso, sem competir com o primeiro paint.
 const TerrainScene = lazy(() => import('./TerrainScene'))
 const OrthoScene = lazy(() => import('./OrthoScene'))
+const Pano360 = lazy(() => import('./Pano360'))
 
 /**
  * Terrain3D — camada de fundo com a maquete 3D da propriedade rural.
  * Deve ficar dentro de um pai com position: relative.
  *
  * variant: 'rural' (maquete ilustrada) | 'orto' (levantamento real: ortofoto + relevo)
+ *          | 'pano' (foto 360° de drone como fundo vivo)
  * seed: número — muda a paisagem gerada (variant 'rural')
  * focus: true destaca o imóvel (divisa, marcos, sede); false mostra só a paisagem
  */
@@ -57,12 +59,19 @@ function Terrain3D({ variant = 'rural', seed = 0, focus = true, className = '', 
   return (
     <div
       ref={ref}
-      className={`terrain-3d${ready ? ' is-on' : ''} ${className}`.trim()}
+      className={`terrain-3d terrain-3d--${variant}${ready ? ' is-on' : ''} ${className}`.trim()}
       aria-hidden="true"
     >
       {load && (
         <Suspense fallback={null}>
-          {variant === 'orto' ? (
+          {variant === 'pano' ? (
+            <Pano360
+              ambient
+              src="/images/pano-360.jpg"
+              srcSmall="/images/pano-360-sm.jpg"
+              onReady={handleReady}
+            />
+          ) : variant === 'orto' ? (
             <OrthoScene onReady={handleReady} onElevation={onElevation} />
           ) : (
             <TerrainScene seed={seed} focus={focus} onReady={handleReady} onElevation={onElevation} />

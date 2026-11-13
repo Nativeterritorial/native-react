@@ -455,6 +455,12 @@ header nav a:hover::before { width: 100%; }
     linear-gradient(90deg, color-mix(in srgb, var(--ink) 82%, transparent) 0%, color-mix(in srgb, var(--ink) 45%, transparent) 38%, transparent 68%),
     linear-gradient(0deg, color-mix(in srgb, var(--ink) 80%, transparent) 0%, transparent 34%);
 }
+/* Foto 360° de fundo: escurece mais, porque a imagem ocupa a tela toda */
+.terrain-3d--pano::after {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 88%, transparent) 0%, color-mix(in srgb, var(--ink) 62%, transparent) 42%, color-mix(in srgb, var(--ink) 18%, transparent) 100%),
+    linear-gradient(0deg, color-mix(in srgb, var(--ink) 92%, transparent) 0%, color-mix(in srgb, var(--ink) 30%, transparent) 45%, color-mix(in srgb, var(--ink) 45%, transparent) 100%);
+}
 /* CTA: paisagem sobre o fundo --moss */
 .cta-section { --terrain-bg: var(--moss); }
 .cta-section .terrain-3d::after {

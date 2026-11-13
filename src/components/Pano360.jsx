@@ -19,8 +19,11 @@ const START = { yaw: 0.35, pitch: -0.3 }
  * Pano360 — visor de foto 360° (equirretangular) de drone.
  * Arrastar gira a vista; sem interação, gira devagar sozinho.
  * No toque só gira na horizontal, para não travar a rolagem da página.
+ *
+ * ambient: modo de fundo (hero) — sem arraste; a vista deriva devagar e
+ * acompanha o mouse de leve.
  */
-function Pano360({ src, srcSmall, label, onReady }) {
+function Pano360({ src, srcSmall, label, onReady, ambient = false }) {
   const hostRef = useRef(null)
   const readyRef = useRef(onReady)
 
@@ -54,6 +57,8 @@ function Pano360({ src, srcSmall, label, onReady }) {
     scene.add(new Mesh(geo, mat))
 
     const view = { ...START, vy: 0, vp: 0 }
+    const look = { x: 0, y: 0, tx: 0, ty: 0 }
+    let drift = 0
     let dragging = false
     let lastX = 0
     let lastY = 0
@@ -77,7 +82,13 @@ function Pano360({ src, srcSmall, label, onReady }) {
     const frame = (now) => {
       const dt = Math.min((now - prev) / 1000, 0.05)
       prev = now
-      if (!dragging) {
+      if (ambient) {
+        if (!reduced) drift += dt * 0.012
+        look.x += (look.tx - look.x) * 0.04
+        look.y += (look.ty - look.y) * 0.04
+        view.yaw = START.yaw + drift - look.x * 0.16
+        view.pitch = -0.36 - look.y * 0.05
+      } else if (!dragging) {
         view.yaw += view.vy
         view.pitch += view.vp
         view.vy *= 0.92
@@ -150,11 +161,20 @@ function Pano360({ src, srcSmall, label, onReady }) {
       lastTouch = performance.now()
     }
 
-    el.addEventListener('pointerdown', onDown)
-    el.addEventListener('pointermove', onMove)
-    el.addEventListener('pointerup', onUp)
-    el.addEventListener('pointercancel', onUp)
-    host.addEventListener('keydown', onKey)
+    const onLook = (e) => {
+      if (e.pointerType === 'touch') return
+      look.tx = (e.clientX / window.innerWidth) * 2 - 1
+      look.ty = (e.clientY / window.innerHeight) * 2 - 1
+    }
+    if (ambient) {
+      window.addEventListener('pointermove', onLook, { passive: true })
+    } else {
+      el.addEventListener('pointerdown', onDown)
+      el.addEventListener('pointermove', onMove)
+      el.addEventListener('pointerup', onUp)
+      el.addEventListener('pointercancel', onUp)
+      host.addEventListener('keydown', onKey)
+    }
 
     const ro = new ResizeObserver(layout)
     ro.observe(host)
@@ -177,6 +197,7 @@ function Pano360({ src, srcSmall, label, onReady }) {
       ro.disconnect()
       io.disconnect()
       document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('pointermove', onLook)
       el.removeEventListener('pointerdown', onDown)
       el.removeEventListener('pointermove', onMove)
       el.removeEventListener('pointerup', onUp)
@@ -188,7 +209,9 @@ function Pano360({ src, srcSmall, label, onReady }) {
       renderer.dispose()
       el.remove()
     }
-  }, [src, srcSmall])
+  }, [src, srcSmall, ambient])
+
+  if (ambient) return <div className="terrain-3d-canvas" ref={hostRef} />
 
   return (
     <div
