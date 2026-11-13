@@ -1482,6 +1482,66 @@ section { position: relative; }
 /* ====================================================================
    GALLERY
    ==================================================================== */
+/* ====================================================================
+   PANORAMA 360° (foto de drone)
+   ==================================================================== */
+.pano-section { padding: 140px 0 0; border-bottom: 1px solid var(--line); position: relative; }
+.pano-section .section-sub { margin-bottom: 56px; }
+.pano-frame {
+  position: relative;
+  height: clamp(360px, 66vh, 680px);
+  overflow: hidden;
+  background: var(--ink-2);
+  border-top: 1px solid var(--line);
+}
+.pano-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.9s ease;
+}
+.pano-frame.is-on .pano-poster { opacity: 0; pointer-events: none; }
+.pano-canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.pano-frame.is-on .pano-canvas { opacity: 1; }
+.pano-canvas.is-dragging { cursor: grabbing; }
+.pano-canvas:focus-visible { box-shadow: inset 0 0 0 2px var(--terracotta); }
+.pano-canvas canvas { display: block; width: 100%; height: 100%; }
+.pano-hint,
+.pano-tag {
+  position: absolute;
+  bottom: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  backdrop-filter: blur(6px);
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.pano-hint { left: 48px; }
+.pano-hint-icon { color: var(--terracotta); margin-right: 6px; }
+.pano-tag { right: 48px; color: var(--ink-mute); }
+@media (max-width: 760px) {
+  .pano-section { padding-top: 80px; }
+  .pano-section .section-sub { margin-bottom: 36px; }
+  .pano-hint { left: 16px; bottom: 16px; }
+  .pano-tag { display: none; }
+}
+
 .gallery-section { padding: 140px 0; border-bottom: 1px solid var(--line); position: relative; }
 .gallery-grid {
   display: grid;

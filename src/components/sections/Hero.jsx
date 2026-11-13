@@ -23,7 +23,7 @@ function Hero() {
   return (
     <section className={`hero${ready3d ? ' has-3d' : ''}`} aria-labelledby="hero-title">
       <div className="hero-bg">
-        <img src="/images/aerial.jpg" alt="" aria-hidden="true" />
+        <img src="/images/rural-hero.jpg" alt="" aria-hidden="true" />
         <Terrain3D onReady={handleReady} onElevation={handleElevation} />
       </div>
 
